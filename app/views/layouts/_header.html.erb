@@ -1,0 +1,45 @@
+<header>
+  <div class="container">
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <%= link_to image_tag("logo.png"), root_url, id: "navbar-logo" %>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarTop">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarTop" class="navbar-menu">
+        <div class="navbar-start">
+          <%= link_to "Friends",   '#', class: "navbar-item" %>
+          <%= link_to "Pages",     '#', class: "navbar-item" %>
+          <%= link_to "Groups",    '#', class: "navbar-item" %>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <%= content_tag "a", 'More', class: "navbar-link" %>
+
+            <div class="navbar-dropdown">
+              <%= link_to "About",    '#', class: "navbar-item" %>
+              <%= link_to "Help",     '#', class: "navbar-item" %>
+              <%= link_to "Contact",  '#', class: "navbar-item" %>
+              <hr class="navbar-divider">
+              <%= content_tag "a", 'Report an issue', class: "navbar-item" %>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <%= content_tag "a", 'Sign up', class: "button is-primary" %>
+              <%= content_tag "a", 'Log in',  class: "button is-light" %>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </nav>
+  </div>
+</header>

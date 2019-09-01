@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+/* set Bulma variables */
+
+$green: #375e37;
+
+/* override Bulma colors */
+
+$custom-colors: ("primary": ($green));
+
+/* import Bulma AFTER customizing all its variables */
+
+@import 'bulma';

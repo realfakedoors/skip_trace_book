@@ -10,3 +10,8 @@ This project is meant to demonstrate an understanding of:
 -Building core features of a social media platform, like friend requests, news feeds, 'likes,' etc.  
 -Modeling a fairly complex data architecture.  
 -Working with mailers.  
+
+Featuring:  
+
+-Bulma CSS framework: https://bulma.io/  
+-PostgreSQL  
