@@ -2,7 +2,7 @@
   <div class="container">
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <%= link_to image_tag("logo.png"), root_url, id: "navbar-logo" %>
+        <%= link_to image_tag("logo.png"), root_path, id: "navbar-logo" %>
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarTop">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -20,9 +20,9 @@
             <%= content_tag "a", 'More', class: "navbar-link" %>
 
             <div class="navbar-dropdown">
-              <%= link_to "About",    '#', class: "navbar-item" %>
-              <%= link_to "Help",     '#', class: "navbar-item" %>
-              <%= link_to "Contact",  '#', class: "navbar-item" %>
+              <%= link_to "About",   about_path,   class: "navbar-item" %>
+              <%= link_to "Help",    help_path,    class: "navbar-item" %>
+              <%= link_to "Contact", contact_path, class: "navbar-item" %>
               <hr class="navbar-divider">
               <%= content_tag "a", 'Report an issue', class: "navbar-item" %>
             </div>

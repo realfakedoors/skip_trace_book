@@ -14,6 +14,10 @@
  *= require_self
  */
 
+/* import a font */
+
+@import url('https://fonts.googleapis.com/css?family=Oxygen&display=swap');
+
 /* set Bulma variables */
 
 $green: #375e37;
@@ -22,6 +26,6 @@ $green: #375e37;
 
 $custom-colors: ("primary": ($green));
 
-/* import Bulma AFTER customizing all its variables */
+
 
 @import 'bulma';
