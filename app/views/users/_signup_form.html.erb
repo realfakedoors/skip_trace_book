@@ -1,13 +1,17 @@
 <%= form_with(model: user, local: true) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(user.errors.count, "error") %> prevented you from signing up! </h2>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+      <div class="notification is-danger">
+        <button class="delete"></button>
+        <ul>
+          <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      
     </div>
   <% end %>
   
@@ -25,16 +29,14 @@
         <%= form.text_field :email, class: "input is-primary" %>
       </div>    
     </div>
-    <%# 3 empty columns to bring the form's fields together on the page %>
-    <div class="column">
-    </div>
-    <div class="column">
-    </div>
-    <div class="column">
-    </div>
+    
+    <%# 3 empty columns push the entry fields to the left %>
+    <%= content_tag(:div, "", class: "column") %>
+    <%= content_tag(:div, "", class: "column") %>
+    <%= content_tag(:div, "", class: "column") %>
   </div>
 
-    <div class="actions">
-      <%= form.submit("Sign up!", class: 'button is-primary') %>
-    </div>
+  <div class="actions">
+    <%= form.submit("Sign up!", class: 'button is-primary') %>
+  </div>
 <% end %>

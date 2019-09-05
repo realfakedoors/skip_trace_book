@@ -1,9 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+RealPerson:
+  name: Davison Porter
+  email: DavisonMPorterIII@goldmansachs.com
 
-one:
-  name: MyString
-  email: MyString
-
-two:
-  name: MyString
-  email: MyString
+BornWithNoName:
+  name: 
+  email: crunkjuice.skiptracebook.net
