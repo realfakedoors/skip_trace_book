@@ -33,8 +33,8 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <%= link_to "Sign up", signup_path, class: "button is-primary" %>
-              <%= content_tag "a", 'Log in',  class: "button is-light" %>
+              <%= link_to "Sign up", new_user_registration_path, class: "button is-primary" %>
+              <%= link_to "Log in",  new_user_session_path,      class: "button is-light" %>
             </div>
           </div>
         </div>
