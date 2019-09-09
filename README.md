@@ -15,3 +15,4 @@ Featuring:
 
 -Bulma CSS framework: https://bulma.io/  
 -PostgreSQL  
+-Authentication with Devise: http://devise.plataformatec.com.br/  
