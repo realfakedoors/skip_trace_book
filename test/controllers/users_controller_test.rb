@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  
   setup do
     @user = users(:RealPerson)
+    sign_in(@user)
   end
 
   test "should get index" do
@@ -11,7 +14,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get signup_url
+    sign_out(@user)
+    get new_user_registration_path
     assert_response :success
   end
 
@@ -21,7 +25,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
-    get edit_user_url(@user)
+    get edit_user_registration_path
     assert_response :success
   end
 

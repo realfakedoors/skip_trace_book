@@ -4,8 +4,16 @@
   <div class="columns is-multiline is-mobile">
     <div class="column is-half">
       <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input is-primary" %>
+      </div>
+    </div>
+    <%= content_tag(:div, "", class: "column is-half") %>
+    
+    <div class="column is-half">
+      <div class="field">
         <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input is-primary" %>
+        <%= f.email_field :email, autocomplete: "email", class: "input is-primary" %>
       </div>
     </div>
     <%= content_tag(:div, "", class: "column is-half") %>
