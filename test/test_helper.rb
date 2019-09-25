@@ -9,11 +9,3 @@ class ActiveSupport::TestCase
   include ApplicationHelper
   
 end
-
-class ActionDispatch::IntegrationTest
-  def sign_in(user, password)
-    post user_session_path \
-      "user[email]" => user.email,
-      "user[password]" => password
-  end
-end

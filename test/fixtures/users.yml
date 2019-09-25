@@ -1,8 +1,9 @@
 RealPerson:
   name: Davison Porter
   email: DavisonMPorterIII@goldmansachs.com
+  encrypted_password: password12345
   confirmed_at: "2019-09-12 1:33:21"
 
-BornWithNoName:
+InvalidLoginPerson:
   name: 
   email: crunkjuice.skiptracebook.net
