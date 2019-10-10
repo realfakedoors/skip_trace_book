@@ -1,0 +1,28 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+freeeeeeee:
+  content: "I don't feel pain anymore"
+  created_at: <%= 30.minutes.ago %>
+  user: RealPerson
+  
+cudi_montage:
+  content: "Stay strong"
+  created_at: <%= 3.hours.ago %>
+  user: WrongPerson
+  
+fire:
+  content: "This is the package you ordered, huh?"
+  created_at: <%= 1.year.ago %>
+  user: RealPerson
+  
+most_recent:
+  content: "Beautiful madness"
+  created_at: <%= Time.now %>
+  user: RealPerson
+  
+<% 50.times do |p| %>
+post_<%= p %>:
+  content: <%= Faker::Hipster.sentence(random_words_to_add: 10) %>
+  created_at: <%= 10.minutes.ago %>
+  user: RealPerson
+<% end %>

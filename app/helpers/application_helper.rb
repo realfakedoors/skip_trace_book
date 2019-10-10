@@ -10,4 +10,13 @@ module ApplicationHelper
     end
   end
   
+  # Renders the items on the bottom of a user's card display.  
+  def card_footer_items(user)
+    if user == current_user
+      ["My Profile", "My Posts"]
+    else
+      ["Profile", "Friend Request", "Message"]
+    end      
+  end
+  
 end

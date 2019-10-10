@@ -7,3 +7,9 @@ RealPerson:
 InvalidLoginPerson:
   name: 
   email: crunkjuice.skiptracebook.net
+  
+WrongPerson:
+  name: Jeremy Jackson
+  email: jjackson@football.sports
+  encrypted_password: password54321
+  confirmed_at: "2019-09-12 1:33:22"

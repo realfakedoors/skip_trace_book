@@ -24,10 +24,22 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bulma-rails', '~> 0.7.5'
 # Flexible authentication solution for Rails with Warden.
 gem 'devise'
+# A file uploader for images.
+gem 'carrierwave'
+# A lightweight image manipulator.
+gem 'mini_magick'
+# Securely configure environment variables.
+gem 'figaro'
+# A pagination library for rails.
+gem 'will_paginate'
+# Integrate the Bulma pagination component.
+gem 'will_paginate-bulma'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Generate random fake data.
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 end
 
 group :development do
@@ -46,11 +58,18 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'webdrivers', '~> 4.0'
   # Creates customizable Minitest output formats
-  gem 'minitest'
-  gem 'minitest-reporters'
+  gem 'minitest', '~> 5.11.3'
+  gem 'minitest-reporters', '~> 1.3.8'
   # Monitors changes in the filesystem and automatically runs tests.
   gem 'guard'
   gem 'guard-minitest'
+end
+
+group :production do
+  # Image upload with cloud services.
+  gem 'fog'
+  # AWS S3 storage service.
+  gem 'aws-sdk-s3'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,0 +1,43 @@
+<%= form_for(@post) do |f| %>  
+  <div class="field">
+    <textarea name="post[content]" id="post_content" class="textarea" rows="4" autofocus="true" placeholder="What's up?" class="input is-primary"></textarea>
+  </div>
+  
+  <nav class="actions">
+    <%= f.submit "Post", class: "button is-primary", id: "submit-post-button" %>
+    <div class="file has-name" id="file-upload">
+      <label class="file-label">
+        <%= f.file_field :picture, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+        <span class="file-cta">
+          <span class="file-label" id="post_picture_label">
+            Add a photo
+          </span>
+        </span>
+        <span class="file-name" id="photo_name">
+          no photo selected...
+        </span>
+      </label>
+    </div>
+  </nav> 
+<% end %>
+
+<!-- update the selected photo name. -->
+<script>
+  const fileInput = document.querySelector('#file-upload input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>
+
+<!-- prevent a user from uploading a picture bigger than 5MB. -->
+<script type="text/javascript">
+  $('#post_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Please choose a photo smaller than 5MB!');
+    }
+  });
+</script>

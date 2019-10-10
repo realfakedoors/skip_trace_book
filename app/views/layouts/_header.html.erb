@@ -16,20 +16,9 @@
             <%= link_to "Friends",   '#', class: "navbar-item" %>
             <%= link_to "Pages",     '#', class: "navbar-item" %>
             <%= link_to "Groups",    '#', class: "navbar-item" %>
+            <%= link_to "Messages",  '#', class: "navbar-item" %>
+            <%= link_to "My Posts",  '#', class: "navbar-item" %>
           <% end %>
-
-          <div class="navbar-item has-dropdown is-hoverable">
-            <%= content_tag "a", 'More', class: "navbar-link" %>
-
-            <div class="navbar-dropdown">
-              <%= link_to "About",   about_path,   class: "navbar-item" %>
-              <%= link_to "Help",    help_path,    class: "navbar-item" %>
-              <%= link_to "Contact", contact_path, class: "navbar-item" %>
-              <hr class="navbar-divider">
-              <%= content_tag "a", 'Report an issue', class: "navbar-item" %>
-            </div>
-            
-          </div>
         </div>
 
         <div class="navbar-end">

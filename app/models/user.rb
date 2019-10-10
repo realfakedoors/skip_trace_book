@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  
+  has_many :posts, dependent: :destroy
+  
   # Include default devise modules. Others available are:
   # :validatable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,6 +18,10 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :encrypted_password, 
                     presence: true, length: { minimum: 6, maximum: 64 }
+                    
+  def feed
+    Post.where("user_id = ?", id)
+  end
                     
   private
   
