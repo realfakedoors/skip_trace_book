@@ -1,0 +1,14 @@
+<div class="columns">
+  <div class="column is-one-third">
+    <%= render 'shared/user_card', user: @author %>
+  </div>
+  <div class="column is-two-thirds">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <%= render 'post', post: @post %>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

@@ -1,5 +1,16 @@
+<% provide(:title, @user.name) %>
 <p id="notice"><%= notice %></p>
 
 <h1><%= @user.name %></h1>
 
 <h2><%= @user.email %></h2>
+
+<div class="col-md-8">
+  <% if @user.posts.any? %>
+    <h3>Posts (<%= @user.posts.count %>)</h3>
+    <ul class="posts">
+      <%= render @posts %>
+    </ul>
+    <%= will_paginate @posts, renderer: BulmaPagination::Rails, class: 'is-primary' %>
+  <% end %>
+</div>

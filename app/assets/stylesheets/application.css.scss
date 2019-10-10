@@ -21,11 +21,20 @@
 /* set Bulma variables */
 
 $green: #375e37;
+$grey_green: #e6fff2;
 
-/* override Bulma colors */
+/* override Bulma's default colors */
 
-$custom-colors: ("primary": ($green));
+$custom-colors:          ("primary": ($green));
+$pagination-focus-border-color:       $green;
+$pagination-current-background-color: $green;
+$pagination-current-border-color:     $green;
+$navbar-item-color:                   $green;
+$navbar-item-hover-color:             $green;
+$input-focus-border-color:            $green;
+$file-cta-color:                      $green;
 
-
+/* file names in 'upload a photo' buttons */
+$file-name-max-width: 14em;
 
 @import 'bulma';

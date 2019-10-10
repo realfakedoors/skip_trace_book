@@ -1,3 +1,18 @@
-<h1>Welcome to the Rest Of Your Life.</h1>
-
-<p>Our feedback loops will provide you with endless distractions from your boring life by looking at everyone else's <em>highlights</em> of their own boring life. You'll spend hours on your phone in bed scrolling through endless baby pictures, views from safe warm cars driving through inhospitable landscapes, political propagandist bullshit, and all-too-vaguely applicable Bible verses. Thoughts and prayers.</p>
+<% if user_signed_in? %>
+  <div class="columns">
+    <div class="column is-one-third">
+      <div class="container">
+        <%= render 'shared/user_card', user: current_user %>
+      </div>
+      <div class="container">
+        <%= render 'posts/create_post' %>
+      </div>
+    </div>
+    
+    <div class="column is-two-thirds">
+      <%= render 'shared/user_feed' %>
+    </div>
+  </div>
+<% else %>
+  <%= render 'signed_out_home' %>
+<% end %>
