@@ -24,6 +24,22 @@ class User < ApplicationRecord
   def feed
     Post.where("user_id = ?", id)
   end
+  
+  def send_friend_request(other_user)
+    friends << other_user
+  end
+  
+  def friend_request_sent?(other_user)
+    friends.include?(other_user)
+  end
+  
+  def accept_friend_request(friendship)
+    friendship.accepted = true
+  end
+  
+  def unfriend(other_user)
+    friends.delete(other_user)
+  end
                     
   private
   

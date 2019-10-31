@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class FriendshipTest < ActiveSupport::TestCase
-  include Devise::Test::IntegrationHelpers
   
   def setup
     @user =   users(:RealPerson)
@@ -36,8 +35,6 @@ class FriendshipTest < ActiveSupport::TestCase
   test "a friendship ceases to exist if one of its users is destroyed" do
     @friendship.save
     @user.destroy
-    assert_raise(ActiveRecord::RecordNotFound) do
-      @friendship.reload
-    end
+    assert_raise(ActiveRecord::RecordNotFound) { @friendship.reload }
   end
 end

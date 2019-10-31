@@ -6,6 +6,8 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(name: "Brand New User", email: "brandnewuser@skiptracebook.com",
                      encrypted_password: "foobar"
                      )
+    @friend = users(:RealPerson)
+    @buddy  = users(:WrongPerson)
   end
   
   test "should be valid" do
@@ -60,6 +62,21 @@ class UserTest < ActiveSupport::TestCase
     @user.posts.create!(content: "I love coffee!")
     assert_difference 'Post.count', -1 do
       @user.destroy
+    end
+  end
+  
+  test "friend request functionality" do
+    # a user can send a friend request to another user.
+    @friend.send_friend_request(@buddy)
+    friendship = Friendship.find_by(user: @friend, friend: @buddy)
+    assert_not_nil friendship
+    assert @friend.friend_request_sent?(@buddy)
+    # a user can accept another user's friend request.
+    @buddy.accept_friend_request(friendship)
+    assert friendship.accepted?
+    # a user can unfriend another user.
+    assert_difference 'Friendship.count', -1 do
+      @friend.unfriend(@buddy)
     end
   end
 end
