@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :friends]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -37,6 +37,13 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     redirect_to users_url, notice: 'User was successfully destroyed.'
+  end
+  
+  def friends
+    @title          = "#{@user.name}'s Friends"
+    @friends        = @user.friends.paginate(page: params[:page], per_page: 12)
+    @row_of_friends = @friends.each_slice(4)
+    render 'show_friends'
   end
 
   private

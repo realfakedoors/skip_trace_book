@@ -1,0 +1,10 @@
+<% @user ||= current_user %>
+
+<div class="quick_stats">
+  <a href="<%= friends_user_path(@user) %>">
+    <strong id="friend_count" class="stat">
+      <%= @user.friends.count %>
+    </strong>
+    friends
+  </a>
+</div>

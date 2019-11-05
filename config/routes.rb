@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   get '/about',     to: 'static_pages#about'
   get '/contact',   to: 'static_pages#contact'
   
-  resources :users
+  resources :users do
+    member do
+      get :friends
+    end
+  end
   resources :posts, only: [:create, :destroy, :show]
+  
 end

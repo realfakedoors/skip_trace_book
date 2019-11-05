@@ -1,0 +1,15 @@
+<% provide(:title, @title) %>
+
+<div class="tile is-ancestor">
+  <% @row_of_friends.each do |friends| %>
+  <div class="tile is-parent is-vertical is-4">
+    <% friends.each do |user| %>
+    <span class="tile is-child">
+      <%= render 'shared/user_card', user: user %>
+    </span>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<%= will_paginate @friends, renderer: BulmaPagination::Rails, class: 'is-primary' %>

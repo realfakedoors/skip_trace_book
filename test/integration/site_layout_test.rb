@@ -38,5 +38,12 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
       assert_select 'div.post-content',    text: post.content
       assert_select 'small',               text: "#{time_ago_in_words(post.created_at)} ago"
     end
+    # A user's friend list displays correctly.
+    @friend = users(:WrongPerson)
+    @user.send_friend_request(@friend)
+    @friend.accept_friend_request(Friendship.find_by(user: @user, friend: @friend))
+    get friends_user_path(@user)
+    assert_select    'p.title', text: @friend.name
+    assert_select 'p.subtitle', text: @friend.email
   end
 end
