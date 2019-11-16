@@ -1,0 +1,4 @@
+<%= form_for friendship, url: friendship_path(friendship) do |f| %>
+  <%= f.button "Accept",   name: "commit", value: "Accept",  class: "button is-primary" %>
+  <%= f.button "Decline",  name: "commit", value: "Decline", class: "button is-light" %>
+<% end %>

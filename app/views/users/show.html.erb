@@ -1,9 +1,13 @@
 <% provide(:title, @user.name) %>
 <p id="notice"><%= notice %></p>
 
-<h1><%= @user.name %></h1>
-
-<h2><%= @user.email %></h2>
+<div class="columns">
+  <div class="column is-one-third">
+    <div class="container">
+      <%= render 'shared/user_card', user: @user %>
+    </div>
+  </div>
+</div>
 
 <div class="col-md-8">
   <% if @user.posts.any? %>

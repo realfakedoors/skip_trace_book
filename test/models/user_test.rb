@@ -68,6 +68,7 @@ class UserTest < ActiveSupport::TestCase
   test "friend request functionality" do
     # a user can send a friend request to another user.
     @friend.send_friend_request(@buddy)
+    assert @friend.friend_request_sent?(@buddy)
     friendship = Friendship.find_by(user: @friend, friend: @buddy)
     assert_not_nil friendship
     assert @friend.friend_request_sent?(@buddy)

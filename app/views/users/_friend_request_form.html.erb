@@ -1,0 +1,11 @@
+<% unless current_user == user %>
+  <div id="friend_request_form">
+  <% if    current_user.friend_request_sent?(user) && !current_user.confirmed_friends?(user) %>
+    <div class="button is-warning">Friend Requested!</div>
+  <% elsif current_user.confirmed_friends?(user) %>
+    <div class="button is-primary">Friends</div>
+  <% else %>
+    <%= render 'request_friendship', user: user %>
+  <% end %>
+  </div>
+<% end %>

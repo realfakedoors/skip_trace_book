@@ -23,18 +23,20 @@ class FriendshipTest < ActiveSupport::TestCase
   end
   
   test "a friendship begins in requested mode until it gets accepted" do
-    @friendship.save
     assert     @friendship.requested?
     assert_not @friendship.friend_accepted?
     @friendship.accepted = true
-    @friendship.save
     assert_not @friendship.requested?
     assert     @friendship.friend_accepted?
   end
   
   test "a friendship ceases to exist if one of its users is destroyed" do
-    @friendship.save
     @user.destroy
     assert_raise(ActiveRecord::RecordNotFound) { @friendship.reload }
+  end
+  
+  test "an inverse friendship is created once a friend request is accepted" do
+    @friend.accept_friend_request(@friendship)
+    assert Friendship.where(user: @friend, friend: @user, accepted: true)
   end
 end

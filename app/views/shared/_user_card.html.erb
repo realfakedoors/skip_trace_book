@@ -7,14 +7,23 @@
         </figure>
       </div>
       <div class="media-content">
-        <p class="title is-4"><%= user.name %></p>
+        <p class="title is-4"><%= link_to user.name, user %></p>
         <p class="subtitle is-6"><%= user.email %></p>
       </div>
     </div>
   </div>
   <footer class="card-footer">
     <% card_footer_items(user).each do |item| %>
-      <%= render 'shared/card_footer_item', item: item %>
+      <p class="card-footer-item is-family-primary">
+        <span class="subtitle is-6">
+          <%= item %>
+        </span>
+      </p>
+    <% end %>
+    <% if user != current_user %>
+      <div class="card-footer-item is-family-primary">
+        <%= render 'friend_request_form', user: user %>
+      </div>
     <% end %>
   </footer>
 </div>

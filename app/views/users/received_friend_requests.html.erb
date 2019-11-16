@@ -1,0 +1,14 @@
+<% provide(:title, "Friend Requests Received") %>
+
+<div class="tile is-ancestor">
+  <div class="tile is-parent is-vertical is-4">
+    <% @requests.each do |friendship| %>
+    <span class="tile is-child">
+      <%= render 'shared/user_card',                 user: friendship.user %><br />
+      <%= render 'shared/respond_to_friend_request', friendship: friendship %>
+    </span>
+    <% end %>
+  </div>
+</div>
+
+<%= will_paginate @requests, renderer: BulmaPagination::Rails, class: 'is-primary' %>

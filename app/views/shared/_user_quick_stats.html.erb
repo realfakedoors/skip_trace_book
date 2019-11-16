@@ -3,7 +3,7 @@
 <div class="quick_stats">
   <a href="<%= friends_user_path(@user) %>">
     <strong id="friend_count" class="stat">
-      <%= @user.friends.count %>
+      <%= @user.friendships.where(accepted: true).count %>
     </strong>
     friends
   </a>

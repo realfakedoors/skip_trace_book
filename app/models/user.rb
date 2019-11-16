@@ -30,11 +30,20 @@ class User < ApplicationRecord
   end
   
   def friend_request_sent?(other_user)
-    friends.include?(other_user)
+    friends.include?(other_user) || other_user.friends.include?(self)
   end
   
   def accept_friend_request(friendship)
     friendship.accepted = true
+  end
+  
+  def decline_friend_request(friendship)
+    friendship.destroy
+  end
+  
+  def confirmed_friends?(other_user)
+    friendship = Friendship.find_by(user: self, friend: other_user)
+    friendship && friendship.accepted?
   end
   
   def unfriend(other_user)

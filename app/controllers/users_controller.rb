@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :friends]
+  before_action :set_user,   except: [:index, :new, :create, :received_friend_requests]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -40,10 +40,16 @@ class UsersController < ApplicationController
   end
   
   def friends
-    @title          = "#{@user.name}'s Friends"
-    @friends        = @user.friends.paginate(page: params[:page], per_page: 12)
-    @row_of_friends = @friends.each_slice(4)
+    @initiated_friendships = @user.friendships
+    @accepted_friends      = @initiated_friendships.where(accepted: true).map { |f| f.friend }
+    @friends               = @accepted_friends.paginate(page: params[:page], per_page: 12)
+    @row_of_friends        = @friends.each_slice(4)
     render 'show_friends'
+  end
+  
+  def received_friend_requests
+    @unanswered_friendships = Friendship.where(accepted: false).where(friend_id: current_user.id).to_a
+                  @requests = @unanswered_friendships.paginate(page: params[:page], per_page: 8)
   end
 
   private
