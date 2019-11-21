@@ -6,15 +6,18 @@
     <div class="container">
       <%= render 'shared/user_card', user: @user %>
     </div>
+    <div class="container">
+      <%= render 'profile_info_card', user: @user %>
+    </div>
   </div>
-</div>
-
-<div class="col-md-8">
-  <% if @user.posts.any? %>
-    <h3>Posts (<%= @user.posts.count %>)</h3>
-    <ul class="posts">
-      <%= render @posts %>
-    </ul>
-    <%= will_paginate @posts, renderer: BulmaPagination::Rails, class: 'is-primary' %>
-  <% end %>
+  <div class="column is-two-thirds">
+    <div class="container">   
+      <% if @user.posts.any? %>
+        <ul class="posts">
+          <%= render @posts %>
+        </ul>
+        <%= will_paginate @posts, renderer: BulmaPagination::Rails, class: 'is-primary' %>
+      <% end %>
+    </div>
+  </div>
 </div>

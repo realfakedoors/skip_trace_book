@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="card-content has-text-right">
+    <% profile_info_items(user).each do |item| %>
+    <% next if item.nil? %>
+      <span class="is-size-7 has-text-weight-light"><%=    item.first %></span>
+      <span class="is-size-5 has-text-weight-semibold"><%= item.last  %></span><br />
+    <% end %>
+  </div>
+</div>

@@ -3,7 +3,11 @@
     <div class="media">
       <div class="media-left">
         <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          <% if user.profile_picture? %>
+            <%= image_tag user.profile_picture.url, size: "48x48" %>
+          <% else %>
+            <%= image_tag  'blank_profile_picture', size: "48x48" %>
+          <% end  %>
         </figure>
       </div>
       <div class="media-content">

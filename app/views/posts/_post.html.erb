@@ -2,7 +2,11 @@
   <article class="media">
     <div class="media-left">
       <figure class="image is-64x64">
-        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
+        <% if post.user.profile_picture? %>
+          <%= image_tag post.user.profile_picture.url, size: "64x64" %>
+        <% else %>
+          <%= image_tag  'blank_profile_picture', size: "64x64" %>
+        <% end  %>
       </figure>
     </div>
     <div class="media-content">

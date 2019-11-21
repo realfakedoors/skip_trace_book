@@ -8,13 +8,58 @@
   <% end %>
   
   <div class="columns is-multiline is-mobile">
+    
     <div class="column is-one-quarter">
-      <div class="field">
-        <%= content_tag(:h3, "New Email (optional)") %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input is-primary" %>
+      <div class="file has-name" id="file-upload">
+        <label class="file-label">
+          <%= f.file_field :profile_picture, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+          <span class="file-cta">
+            <span class="file-label" id='user_profile_picture_label'>
+              Add a profile picture!
+            </span>
+          </span>
+          <span   class="file-name"  id="photo_name">
+            no picture selected...
+          </span>
+        </label>
       </div>
     </div>
     <%= content_tag(:div, "", class: "column is-three-quarters") %>
+    
+    <div class="column is-one-quarter">
+      <div class="field">
+        <%= content_tag(:h3, "New Email (optional)") %>
+        <%= f.email_field :email, autocomplete: "email", class: "input is-primary" %>
+      </div>
+    </div>
+    
+    <div class="column is-one-quarter">
+      <div class="field">
+        <%= content_tag(:h3, "Occupation") %>
+        <%= f.text_field :occupation, autocomplete: "occupation", class: "input is-primary" %>
+      </div>
+    </div>
+    
+    <div class="column is-one-quarter">
+      <div class="field">
+        <%= content_tag(:h3, "Company") %>
+        <%= f.text_field :company, autocomplete: "company", class: "input is-primary" %>
+      </div>
+    </div>
+    
+    <div class="column is-one-quarter">
+      <div class="field">
+        <%= content_tag(:h3, "Location") %>
+        <%= f.text_field :location, autocomplete: "location", class: "input is-primary" %>
+      </div>
+    </div>
+    
+    <div class="column is-one-quarter">
+      <div class="field">
+        <%= content_tag(:h3, "Birthday") %>
+        <%= f.date_field :birthday, autocomplete: "birthday", class: "input is-primary" %>
+      </div>
+    </div>
 
     <div class="column is-one-quarter">
       <div class="field">
@@ -33,12 +78,11 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input is-primary" %>
       </div>
     </div>
-    <%= content_tag(:div, "", class: "column is-half") %>
 
     <div class="column is-one-quarter">
       <div class="field">
         <%= content_tag(:h3, "Current Password") %>
-        <%= f.password_field :current_password, autocomplete: "current-password", class: "input is-primary" %>
+        <%= f.password_field :current_password, autofocus: true, autocomplete: "current-password", class: "input is-primary" %>
       </div>
     </div>
   </div>
@@ -49,3 +93,14 @@
 <% end %>
 
 <p>Want your life back? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button is-light" %></p>
+
+<!-- update the selected photo name. -->
+<script>
+  const fileInput = document.querySelector('#file-upload input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

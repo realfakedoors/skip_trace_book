@@ -10,4 +10,13 @@ module UsersHelper
     end      
   end
   
+  # Renders a user's profile info on their show page.
+  def profile_info_items(user)
+    occupation = ["Occupation", user.occupation]
+    company =    ["Company",    user.company]
+    location =   ["Location",   user.location]
+    birthday =   ["Birthday",   user.birthday.strftime("%m/%d/%Y")]
+    [ occupation, company, location, birthday ]
+  end
+  
 end

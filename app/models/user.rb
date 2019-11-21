@@ -9,6 +9,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable,
          :confirmable, :lockable
+         
+  mount_uploader :profile_picture, PictureUploader
   
   before_save :downcase_email
   
@@ -20,6 +22,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :encrypted_password, 
                     presence: true, length: { minimum: 6, maximum: 64 }
+  validate :profile_picture_size
                     
   def feed
     Post.where("user_id = ?", id)
@@ -56,5 +59,11 @@ class User < ApplicationRecord
     def downcase_email
       email.downcase!
     end
-    
+  
+    #Validates the size of a user's profile picture.
+    def profile_picture_size
+      if profile_picture.size > 5.megabytes
+        errors.add(:profile_picture, "should be less than 5MB")
+      end
+    end    
 end
