@@ -15,7 +15,7 @@ module UsersHelper
     occupation = ["Occupation", user.occupation]
     company =    ["Company",    user.company]
     location =   ["Location",   user.location]
-    birthday =   ["Birthday",   user.birthday.strftime("%m/%d/%Y")]
+    birthday =   ["Birthday",   user.birthday? ? user.birthday.strftime("%m/%d/%Y") : nil]
     [ occupation, company, location, birthday ]
   end
   

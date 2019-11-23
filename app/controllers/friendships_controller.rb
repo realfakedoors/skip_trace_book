@@ -22,6 +22,7 @@ class FriendshipsController < ApplicationController
   def destroy
     user = Friendship.find(params[:id]).friend
     current_user.unfriend(user)
+    user.unfriend(current_user)
     refresh_page
   end
   

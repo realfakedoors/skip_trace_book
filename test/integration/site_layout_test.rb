@@ -30,10 +30,13 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     
     get user_path(@user)
     # Basic user information is shown.
-    assert_select      'title', full_title(@user.name)
-    assert_select    'p.title', text: @user.name
-    assert_select 'p.subtitle', text: @user.email
-    assert_match  @user.posts.count.to_s, response.body
+    assert_select      'title',     full_title(@user.name)
+    assert_select    'p.title',     text: @user.name
+    assert_select 'p.subtitle',     text: @user.email
+    assert_select 'span.is-size-5', text: @user.occupation
+    assert_select 'span.is-size-5', text: @user.company
+    assert_select 'span.is-size-5', text: @user.location
+    assert_select 'span.is-size-5', text: @user.birthday.strftime("%m/%d/%Y")
     
     # A user's post feed displays correctly.
     assert_select 'nav.pagination'

@@ -1,6 +1,10 @@
 RealPerson:
   name: Davison Porter
   email: DavisonMPorterIII@goldmansachs.com
+  occupation: Grifter
+  company: Goldman Sachs
+  location: New York City
+  birthday: Wed, 12 Jun 1996
   encrypted_password: password12345
   confirmed_at: "2019-09-12 1:33:21"
 
