@@ -1,0 +1,5 @@
+PhotoOne:
+  album: AlbumOne
+  photo_data: str
+  title: str
+  description: str

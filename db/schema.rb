@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_032054) do
+ActiveRecord::Schema.define(version: 2019_11_23_225849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_albums_on_user_id"
+  end
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -24,6 +33,16 @@ ActiveRecord::Schema.define(version: 2019_11_21_032054) do
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
     t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.bigint "album_id"
+    t.string "photo_data"
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_photos_on_album_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -63,5 +82,7 @@ ActiveRecord::Schema.define(version: 2019_11_21_032054) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "albums", "users"
+  add_foreign_key "photos", "albums"
   add_foreign_key "posts", "users"
 end
