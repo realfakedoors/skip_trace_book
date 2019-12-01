@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :correct_user, only: :destroy
+  before_action :correct_user,         only: :destroy
+  before_action :check_for_friendship, only: :show
   
   def create
     @post = current_user.posts.build(post_params)
@@ -14,8 +15,6 @@ class PostsController < ApplicationController
   end
   
   def show
-    @post   = Post.find(params[:id])
-    @author = @post.user
   end
     
   def destroy
@@ -32,7 +31,17 @@ class PostsController < ApplicationController
     end
     
     def correct_user
-      @post = current_user.posts.find_by(id: params[:id])
-      redirect_to root_url if @post.nil?
+      @post = Post.find(params[:id])
+      if @post.user != current_user
+        redirect_to root_url, notice: "Invalid user permissions!"
+      end
+    end
+    
+    def check_for_friendship
+      @post   = Post.find(params[:id])
+      @author = @post.user
+      unless current_user == @author || @author.confirmed_friends?(current_user)
+        redirect_to root_url, notice: "You're not friends with #{@author.name}."
+      end
     end
 end

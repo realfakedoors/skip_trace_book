@@ -52,7 +52,7 @@ class User < ApplicationRecord
   end
   
   def unfriend(other_user)
-    friends.delete(other_user)
+    Friendship.find_by(user: self, friend: other_user).delete
   end
                     
   private

@@ -12,7 +12,6 @@ class FriendshipsController < ApplicationController
     if commit == "Accept"
       friendship.accepted = true
       friendship.save
-      friendship.create_inverse_friendship
     elsif commit == "Decline"
       friendship.destroy
     end

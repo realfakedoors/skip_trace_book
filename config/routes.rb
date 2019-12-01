@@ -12,10 +12,11 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :friends
+      get :albums
     end
   end
   resources :friendships, only:   [:create, :update, :destroy]
   resources       :posts, only:   [:create, :show,   :destroy]
   resources      :photos, only:   [:create, :show,   :destroy]
-  resources      :albums, except: [:index,  :edit,   :update ]
+  resources      :albums, only:   [:create, :show,   :destroy, :new]
 end

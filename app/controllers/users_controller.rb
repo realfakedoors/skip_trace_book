@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user,   except: [:index, :new, :create, :received_friend_requests]
+  before_action :set_user,             except: [:index, :new, :create, :received_friend_requests]
+  before_action :check_for_friendship,   only: [:friends, :albums, :show]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -47,6 +48,11 @@ class UsersController < ApplicationController
     render 'show_friends'
   end
   
+  def albums
+    @albums = @user.albums
+    render 'user_album_gallery'
+  end
+  
   def received_friend_requests
     @unanswered_friendships = Friendship.where(accepted: false).where(friend_id: current_user.id).to_a
                   @requests = @unanswered_friendships.paginate(page: params[:page], per_page: 8)
@@ -59,5 +65,11 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :profile_picture)
+    end
+    
+    def check_for_friendship
+      unless @user == current_user || @user.confirmed_friends?(current_user)
+        redirect_to root_url, notice: "You're not friends with #{@user.name}."
+      end
     end
 end

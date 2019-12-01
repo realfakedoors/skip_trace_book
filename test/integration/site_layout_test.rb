@@ -45,7 +45,34 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
       assert_select 'small',               text: "#{time_ago_in_words(post.created_at)} ago"
     end
     
-    # A user's card footer items display correctly.
+    # A user's profile, photos, albums, posts and card footer items display correctly.
+    get user_path(@friend)
+    assert_redirected_to root_url
+    
+    @album = Album.create( user:        @friend,
+                           title:       "book of photos",
+                           description: "these are pictures" )
+    
+    @photo = Photo.create( album:       @album,
+                           title:       "new pic",
+                           description: "spring break",
+                           photo_data:  "picture" )
+    
+    get photo_path(@photo)
+    assert_redirected_to root_url
+    get album_path(@album)
+    assert_redirected_to root_url
+    get post_path(@friend.posts.first)
+    assert_redirected_to root_url
+    
+    sign_in @user
+    @user.send_friend_request(@friend)
+    @friendship = Friendship.find_by(user: @user, friend: @friend)
+    
+    sign_in @friend
+    patch friendship_path(@friendship), params: { commit: "Accept" }
+    
+    sign_in @user
     get user_path(@friend)
     assert_select 'span.subtitle',                         text: "Message"
     assert_select 'a[href=?]', friends_user_path(@friend), text: "Friends"
@@ -54,7 +81,11 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select 'span.subtitle',                         text: "My Posts"
     assert_select 'a[href=?]', friends_user_path(@user),   text: "Friends"
     
-    # A user can send, approve and decline friend requests correctly.
+    
+    
+  end
+    
+  test "A user can send, approve and decline friend requests correctly" do
     @user.send_friend_request(@friend)
     @friendship = Friendship.find_by(user: @user, friend: @friend)
     
