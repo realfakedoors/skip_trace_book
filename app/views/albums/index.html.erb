@@ -1,0 +1,16 @@
+<% provide(:title, "#{@user.name}'s Albums") %>
+
+<%= content_tag :p, "#{@user.name}'s Albums", class: "title is-3" %>
+<div class="tile is-ancestor">
+  <% @albums.each_slice(2) do |column| %>
+    <div class="tile is-parent is-4 is-vertical">
+      <% column.each do |album| %>
+        <article class="tile is-child">
+          <%= render 'albums/album_preview_card', album: album %>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= will_paginate @albums, renderer: BulmaPagination::Rails, class: 'is-primary' %>

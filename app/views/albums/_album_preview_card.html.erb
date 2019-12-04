@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <%= link_to album do %>
+        <% if album.preview %>
+          <%= image_tag album.preview %>
+        <% else %>
+          <%= image_tag 'blank_album' %>
+        <% end %>
+      <% end %>
+    </figure>
+  </div>
+  <div class="card-content">
+    <%= content_tag :div, album.title,       class: 'title is-4'    %>
+    <%= content_tag :div, album.description, class: 'subtitle is-6' %>
+  </div>
+</div>

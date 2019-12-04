@@ -4,15 +4,15 @@
       <div class="media-left">
         <figure class="image is-48x48">
           <% if user.profile_picture? %>
-            <%= image_tag user.profile_picture.url, size: "48x48" %>
+            <%= image_tag  user.profile_picture.url %>
           <% else %>
-            <%= image_tag  'blank_profile_picture', size: "48x48" %>
+            <%= image_tag 'blank_profile_picture'   %>
           <% end  %>
         </figure>
       </div>
       <div class="media-content">
         <p class="title is-4"><%= link_to user.name, user %></p>
-        <p class="subtitle is-6"><%= user.email %></p>
+        <p class="subtitle is-7"><%= user.email %></p>
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@
     <% end %>
     <% if user != current_user %>
       <div class="card-footer-item is-family-primary">
-        <%= render 'friend_request_form', user: user %>
+        <%= render 'users/friend_request_form', user: user %>
       </div>
     <% end %>
   </footer>

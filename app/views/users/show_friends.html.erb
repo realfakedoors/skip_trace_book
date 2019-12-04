@@ -1,14 +1,14 @@
 <% provide(:title, "#{@user.name}'s Friends") %>
 
 <div class="tile is-ancestor">
-  <% @row_of_friends.each do |friends| %>
-  <div class="tile is-parent is-vertical is-4">
-    <% friends.each do |user| %>
-    <span class="tile is-child">
-      <%= render 'shared/user_card', user: user %>
-    </span>
-    <% end %>
-  </div>
+  <% @friends.each_slice(3) do |column| %>
+    <div class="tile is-parent is-4 is-vertical">
+      <% column.each do |user| %>
+        <article class="tile is-child">
+          <%= render 'shared/user_card', user: user %>
+        </article>
+      <% end %>
+    </div>
   <% end %>
 </div>
 

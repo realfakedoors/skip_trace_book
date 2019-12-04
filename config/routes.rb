@@ -15,8 +15,8 @@ Rails.application.routes.draw do
       get :albums
     end
   end
+  resources      :albums
   resources :friendships, only:   [:create, :update, :destroy]
   resources       :posts, only:   [:create, :show,   :destroy]
   resources      :photos, only:   [:create, :show,   :destroy]
-  resources      :albums, only:   [:create, :show,   :destroy, :new]
 end

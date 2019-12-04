@@ -43,19 +43,18 @@ class UsersController < ApplicationController
   def friends
     @initiated_friendships = @user.friendships
     @accepted_friends      = @initiated_friendships.where(accepted: true).map { |f| f.friend }
-    @friends               = @accepted_friends.paginate(page: params[:page], per_page: 12)
-    @row_of_friends        = @friends.each_slice(4)
+    @friends               = @accepted_friends.paginate(page: params[:page], per_page: 9)
     render 'show_friends'
   end
   
   def albums
-    @albums = @user.albums
-    render 'user_album_gallery'
+    @albums = @user.albums.paginate(page: params[:page], per_page: 6)
+    render 'albums/index'
   end
   
   def received_friend_requests
     @unanswered_friendships = Friendship.where(accepted: false).where(friend_id: current_user.id).to_a
-                  @requests = @unanswered_friendships.paginate(page: params[:page], per_page: 8)
+                  @requests = @unanswered_friendships.paginate(page: params[:page], per_page: 9)
   end
 
   private
