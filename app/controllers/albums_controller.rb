@@ -4,9 +4,13 @@ class AlbumsController < ApplicationController
   before_action :correct_user,         only:   [:edit,  :update, :destroy]
 
   def index
+    @user   = User.find(params[:id])
+    @albums = @user.albums
   end
   
   def show
+    @edit_button = true if user_logged_in?
+    @photos = @album.photos.paginate(page: params[:page], per_page: 6)
   end
 
   def new
@@ -24,9 +28,15 @@ class AlbumsController < ApplicationController
   end
   
   def edit
+    @photos = @album.photos.paginate(page: params[:page], per_page: 6)
   end
   
   def update
+    if @album.update(album_params)
+      redirect_to @album, notice: 'Album updated!'
+    else
+      render :edit, notice: 'Failed to update album!'
+    end
   end
 
   def destroy

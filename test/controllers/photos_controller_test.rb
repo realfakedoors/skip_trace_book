@@ -12,10 +12,13 @@ class PhotosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create photo" do
     assert_difference('Photo.count') do
-      post photos_url, params: { photo: { album_id: @album.id, description: "Dog Photo", photo_data: "puppy.jpg", title: "cat" } }
+      post photos_url, params: { photo: { album_id: @album.id, 
+                                       description: "Dog Photo", 
+                                        photo_data: "puppy.jpg", 
+                                             title: "cat"         } }
     end
 
-    assert_redirected_to Photo.last
+    assert_redirected_to edit_album_url(@album)
   end
 
   test "should show photo" do
@@ -28,6 +31,6 @@ class PhotosControllerTest < ActionDispatch::IntegrationTest
       delete photo_url(@photo)
     end
 
-    assert_redirected_to photos_url
+    assert_redirected_to edit_album_url(@album)
   end
 end

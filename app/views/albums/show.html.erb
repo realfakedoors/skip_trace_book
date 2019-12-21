@@ -1,18 +1,31 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @album.title) %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @album.title %>
-</p>
+<div class="album-info">
+  <%= content_tag :div, @album.title,             class: 'title is-4'    %>
+  <%= content_tag :div, @album.description,       class: 'subtitle is-6' %>
+  <%= content_tag :div, "by #{@album.user.name}", class: 'subtitle is-7' %>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @album.description %>
-</p>
+<% if @edit_button == true %>
+  <section class="section">
+    <div class="buttons">
+      <%= link_to "Add, edit or delete photos", edit_album_path(@album), class: "button is-primary is-rounded" %>
+    </div>
+  </section>
+<% end %>
 
-<p>
-  <strong>User:</strong>
-  <%= @album.user %>
-</p>
+<div class="tile is-ancestor">
+  <% @photos.each_slice(2) do |column| %>
+    <div class="tile is-parent is-4 is-vertical">
+      <% column.each do |photo| %>
+        <% if photo.id %>
+          <article class="tile is-child">
+            <%= render 'photos/photo_card', photo: photo, edit: "off" %>
+          </article>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
-<%= link_to 'Back', albums_path %>
+<%= will_paginate @photos, renderer: BulmaPagination::Rails, class: 'is-primary' %>

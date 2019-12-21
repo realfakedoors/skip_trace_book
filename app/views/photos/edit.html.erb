@@ -1,0 +1,40 @@
+<section class="section">
+  <div class="columns">
+    <%= content_tag :div, "", class: "column" %>
+    <div class="column is-one-third">
+      <%= form_for(@photo) do |f| %>
+        <div class="title is-3 has-text-centered">
+          Edit Photo
+        </div>
+        
+        <figure class="image is-4by3">
+          <%= link_to @photo do %>
+            <% if @photo.photo_data? %>
+              <%= image_tag @photo.photo_data.url %>
+            <% end %>
+          <% end %>
+        </figure>
+        
+        <div class="field">
+          <%= content_tag(:h3, "Title") %>
+          <%= f.text_field :title, class: "input is-primary" %>
+        </div>
+        
+        <div class="field">
+          <%= content_tag(:h3, "Description") %>
+          <%= f.text_area :description, class: "textarea is-primary" %>
+        </div>
+          
+        <div class="submit">
+          <%= f.submit "Save Changes", class: "button is-primary", id: "submit-photo-button" %>
+          <%= link_to "Delete Photo", @photo, method: :delete, class: "button is-danger" %>
+        </div>
+        
+        <div class="field">
+          
+        </div>
+      <% end %>
+    </div>
+    <%= content_tag :div, "", class: "column" %>
+  </div>
+</section>

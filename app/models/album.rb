@@ -3,6 +3,6 @@ class Album < ApplicationRecord
   has_many   :photos, dependent: :destroy
   
   def preview
-    self.photos.first
+    self.photos.last
   end
 end

@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease.
 gem 'jbuilder', '~> 2.5'
+# Automate jQuery with Rails.
+gem 'jquery-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 # A modern CSS framework based on Flexbox. https://bulma.io/

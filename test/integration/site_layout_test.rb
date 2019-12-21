@@ -90,7 +90,10 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select 'div.subtitle',  text: @album.description
     assert_select 'a[href=?]',            album_path(@album)
     get album_path(@album)
-    # show album
+    assert_select 'div.title',     text: @album.title
+    assert_select 'div.subtitle',  text: @album.description
+    assert_select 'div.subtitle',  text: "by #{@friend.name}"
+    
     # their Posts,
     get post_path(@post)
     assert_select 'div.post-content', text: @post.content
@@ -111,7 +114,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     sign_in @friend
     get edit_album_path(@album)
     # edit form
-    patch album_path(@album)
+    # patch album_path(@album)
     # goes through
     delete album_path(@album)
     # goes through

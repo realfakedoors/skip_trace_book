@@ -1,21 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Album:</strong>
-  <%= @photo.album %>
-</p>
-
-<p>
-  <strong>Photo data:</strong>
-  <%= @photo.photo_data %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @photo.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @photo.description %>
-</p>
+<div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <p class="image is-4by3">
+      <% if @photo.photo_data? %>
+        <%= image_tag @photo.photo_data.url %>
+      <% end %>
+      <%= content_tag :h2, @photo.title,       class: "title is-2 has-text-white" %>
+      <%= content_tag :h4, @photo.description, class: "subtitle is-4 has-text-white" %>
+    </p>
+  </div>
+  <%= link_to :back do %>
+    <button class="modal-close is-large" aria-label="close"></button>
+  <% end %>
+</div>

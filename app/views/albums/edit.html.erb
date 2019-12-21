@@ -1,0 +1,30 @@
+<div class="columns">
+  <div class="column is-one-quarter">
+    <div class="box">
+      <%= render 'album_info_form', album: @album %>
+    </div>
+    <div class="box">
+      <%= render 'add_photo', album: @album %>
+    </div>
+    <div class="level">
+      <%= link_to "Delete Album", @album, method: :delete, class: "button is-danger" %>
+    </div>
+  </div>
+  <div class="column is-three-quarters">
+    <div class="tile is-ancestor">
+      <% @photos.each_slice(2) do |column| %>
+        <div class="tile is-parent is-4 is-vertical">
+          <% column.each do |photo| %>
+            <% if photo.id %>
+              <article class="tile is-child">
+                <%= render 'photos/photo_card', photo: photo, edit: "on" %>
+              </article>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= will_paginate @photos, renderer: BulmaPagination::Rails, class: 'pagination is-primary' %>

@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <%= link_to photo do %>
+        <% if photo.photo_data? %>
+          <%= image_tag photo.photo_data.url %>
+        <% end %>
+      <% end %>
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4"><%= photo.title %></p>
+      </div>
+    </div>
+    <div class="content">
+      <%= photo.description %>
+    </div>
+    <% if edit == "on" %>
+      <footer class="card-footer">
+        <%= link_to "Edit",   edit_photo_path(photo.id), class: "card-footer-item has-text-info"   %>
+        <%= link_to "Delete", photo,    method: :delete, class: "card-footer-item has-text-danger" %>
+      </footer>
+    <% end %>
+  </div>
+</div>

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
   resources      :albums
+  resources      :photos
   resources :friendships, only:   [:create, :update, :destroy]
   resources       :posts, only:   [:create, :show,   :destroy]
-  resources      :photos, only:   [:create, :show,   :destroy]
 end

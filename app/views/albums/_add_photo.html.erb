@@ -1,0 +1,50 @@
+<%= form_for album.photos.build do |f| %>
+  <div class="title is-5 has-text-centered">
+    Add a photo
+  </div>
+  
+  <div class="field">
+    <%= f.text_field :title,       class: "input is-primary", placeholder: "Title" %>
+  </div>
+  
+  <div class="field">
+    <%= f.text_field :description, class: "input is-primary", placeholder: "Description" %>
+  </div>
+
+  <div class="field">
+    <nav class="level">
+      <div class="level-item has-text-centered">
+        <div class="file has-name is-boxed" id="file-upload" data-turbolinks="false">
+          <label class="file-label">
+            <%= f.file_field :photo_data, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+            <div class="file-cta">
+              <div class="file-label" id="photo_label">
+                Select a photo!
+              </div>
+            </div>
+            <div class="file-name" id="photo_name">
+              no photo selected...
+            </div>
+          </label>
+        </div>
+      </div>
+    </nav>
+  </div>
+  
+  <%= f.hidden_field :album_id, value: album.id %>
+        
+  <div class="field">
+    <%= f.submit "Add Photo", class: "button is-primary is-fullwidth", id: "submit-photo-button" %>
+  </div>
+<% end %>
+
+<!-- update the selected photo name. -->
+<script>
+  const fileInput = document.querySelector('#file-upload input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

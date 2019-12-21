@@ -1,0 +1,19 @@
+<%= form_for(album) do |f| %>
+  <div class="subtitle is-5 has-text-centered">
+    Edit Album Info
+  </div>
+  
+  <div class="field">
+    <%= content_tag(:h3, "Title") %>
+    <%= f.text_field :title, class: "input is-primary" %>
+  </div>
+  
+  <div class="field">
+    <%= content_tag(:h3, "Description") %>
+    <%= f.text_area :description, class: "textarea is-primary" %>
+  </div>
+    
+  <div class="submit">
+    <%= f.submit "Save Changes", class: "button is-primary", id: "submit-album-button" %>
+  </div>
+<% end %>
