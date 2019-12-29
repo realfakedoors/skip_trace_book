@@ -1,10 +1,7 @@
 class PhotosController < ApplicationController
-  before_action :set_photo,            except: [:new, :index, :create]
+  before_action :set_photo,            except: [:new,  :create]
   before_action :correct_user,         only:   [:edit, :update, :destroy]
   before_action :check_for_friendship, only:    :show
-
-  def index
-  end
   
   def new
     @photo = Photo.new
@@ -27,6 +24,11 @@ class PhotosController < ApplicationController
   end
   
   def update
+    if @photo.update(photo_params)
+      redirect_to @photo, notice: 'photo updated!'
+    else
+      render :edit, notice: 'Failed to update photo!'
+    end
   end
 
   def destroy

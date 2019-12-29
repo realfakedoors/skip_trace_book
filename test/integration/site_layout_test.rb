@@ -81,8 +81,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     sign_in @user
     # their Photos,
     get photo_path(@photo)
-    # assert_select 'element', text: @photo.title
-    # assert_select 'element', text: @photo.description
+    assert_select 'h2.title',    text: @photo.title
+    assert_select 'h4.subtitle', text: @photo.description
     # their Albums,
     get albums_user_path(@friend)
     assert_select 'p.title',       text: "#{@friend.name}'s Albums"

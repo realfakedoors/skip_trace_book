@@ -1,5 +1,5 @@
 class AlbumsController < ApplicationController
-  before_action :set_album,            except: [:new, :create, :index]
+  before_action :set_album,            except: [:new,   :create, :index  ]
   before_action :check_for_friendship, only:   [:index, :show]
   before_action :correct_user,         only:   [:edit,  :update, :destroy]
 
