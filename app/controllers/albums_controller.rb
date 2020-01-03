@@ -4,8 +4,8 @@ class AlbumsController < ApplicationController
   before_action :correct_user,         only:   [:edit,  :update, :destroy]
 
   def index
-    @user   = User.find(params[:id])
-    @albums = @user.albums
+    @user        = User.find(params[:id])
+    @albums      = @user.albums
   end
   
   def show
@@ -19,6 +19,7 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
+    @album.user = current_user
     
     if @album.save
       redirect_to @album, notice: "Album created!"

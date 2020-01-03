@@ -7,7 +7,7 @@ This project is meant to demonstrate an understanding of:
 -Periodic live deployment to Heroku.  
 -External API integration with OAuth.  
 -Building core features of a social media platform, like friend requests, news feeds, 'likes,' etc.  
--Modeling a fairly complex data architecture.  
+-Modeling a fairly complex data architecture with polymorphic associations.  
 -Working with mailers.  
 
 Featuring:  

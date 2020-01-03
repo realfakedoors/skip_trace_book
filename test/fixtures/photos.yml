@@ -1,11 +1,11 @@
 Mario:
-  album: CoolPics
   photo_data: a picture of Mario!
   title: The Red Luigi
   description: the number one protagonist in video games.
+  photo_attachable: CoolPics (Album)
 
 Bowser:
-  album: CoolPics
   photo_data: a portrait of Bowser!
   title: Mario's Nemesis
   description: look at this guy, kidnapping princesses!
+  photo_attachable: CoolPics (Album)

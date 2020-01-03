@@ -5,7 +5,7 @@ class AlbumTest < ActiveSupport::TestCase
   def setup
   	@user  = users(:RealPerson)
   	@album = albums(:CoolPics)
-  	@photo = @album.photos.last
+  	@photo = photos(:Mario)
   end
 
   test "album should be valid" do

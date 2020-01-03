@@ -1,6 +1,15 @@
 <% provide(:title, "#{@user.name}'s Albums") %>
 
 <%= content_tag :p, "#{@user.name}'s Albums", class: "title is-3" %>
+
+<% if @user == current_user %>
+  <section class="section">
+    <div class="buttons">
+      <%= link_to "Create Album", new_album_path, class: "button is-primary is-rounded" %>
+    </div>
+  </section>
+<% end %>
+
 <div class="tile is-ancestor">
   <% @albums.each_slice(2) do |column| %>
     <div class="tile is-parent is-4 is-vertical">

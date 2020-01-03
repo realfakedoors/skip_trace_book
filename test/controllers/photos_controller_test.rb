@@ -6,27 +6,28 @@ class PhotosControllerTest < ActionDispatch::IntegrationTest
   setup do
     @album = albums(:CoolPics)
     @photo = photos(:Mario)
-    @user  =  users(:RealPerson)
+    @user  = users(:RealPerson)
     sign_in @user
   end
 
   test "should create photo" do
     photo = fixture_file_upload('files/puppy.png', 'image/png')
     assert_difference('Photo.count') do
-      post photos_url, params: { photo: { album_id: @album.id,
-                                             title: "cat",
-                                       description: "Dog Photo", 
-                                        photo_data: photo  } }
+      post photos_url, params: { photo: { photo_attachable_id: @album.id,
+                                        photo_attachable_type: "Album",
+                                                        title: "cat",
+                                                  description: "Dog Photo", 
+                                                   photo_data: photo  } }
     end
-    assert_redirected_to edit_album_url(@album)
   end
 
   test "photo data should be less than 5MB" do
     huge_photo = fixture_file_upload('files/huge.jpg', 'image/jpg')
-    post photos_url, params: { photo: { album_id: @album.id,
-                                           title: "massive photo",
-                                     description: "this is a bit too big",
-                                      photo_data: huge_photo }}
+    post photos_url, params: { photo: { photo_attachable_id: @album.id,
+                                      photo_attachable_type: "Album",
+                                                      title: "massive photo",
+                                                description: "this is a bit too big",
+                                                 photo_data: huge_photo }}
     assert_redirected_to root_url
   end
 
@@ -56,7 +57,5 @@ class PhotosControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Photo.count', -1) do
       delete photo_url(@photo)
     end
-
-    assert_redirected_to edit_album_url(@album)
   end
 end

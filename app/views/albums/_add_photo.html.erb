@@ -31,7 +31,8 @@
     </nav>
   </div>
   
-  <%= f.hidden_field :album_id, value: album.id %>
+  <%= f.hidden_field :photo_attachable_id,   :value => album.id %>
+  <%= f.hidden_field :photo_attachable_type, :value => "Album"  %>
         
   <div class="field">
     <%= f.submit "Add Photo", class: "button is-primary is-fullwidth", id: "submit-photo-button" %>

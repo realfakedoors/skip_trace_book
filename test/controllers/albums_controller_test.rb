@@ -23,8 +23,6 @@ class AlbumsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Album.count') do
       post albums_url, params: { album: { description: "Awesome Pics", title: "Pictures", user_id: @user.id } }
     end
-
-    assert_redirected_to album_url(Album.last)
   end
 
   test "should show album" do

@@ -12,9 +12,8 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(photo_params)
-
     if @photo.save
-      redirect_to edit_album_url(@photo.album), notice: "Photo was successfully created!"
+      redirect_back fallback_location: @photo, notice: "Photo was successfully created!"
     else
       redirect_to root_url, notice: "Unable to save photo!"
     end
@@ -32,15 +31,14 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    album = @photo.album
     @photo.destroy
-    redirect_to edit_album_url(album), notice: 'Photo was successfully destroyed.'
+    redirect_back fallback_location: root_url, notice: 'Photo was successfully destroyed.'
   end
 
   private
 
     def photo_params
-      params.require(:photo).permit(:album_id, :photo_data, :title, :description)
+      params.require(:photo).permit(:photo_data, :title, :description, :photo_attachable_id, :photo_attachable_type)
     end
     
     def set_photo
@@ -48,11 +46,11 @@ class PhotosController < ApplicationController
     end
     
     def user_logged_in?
-      true if current_user == @photo.album.user
+      true if current_user == @photo.photo_attachable.user
     end
     
     def check_for_friendship
-      unless user_logged_in? || @photo.album.user.confirmed_friends?(current_user)
+      unless user_logged_in? || @photo.photo_attachable.user.confirmed_friends?(current_user)
         redirect_to root_url, notice: "You can't view photos of non-friends!"
       end
     end

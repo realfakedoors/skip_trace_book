@@ -17,7 +17,9 @@
           <small><%=  time_ago_in_words(post.created_at) %> ago</small><br />
           <div class="post-content">
             <%= post.content %><br />
-            <%= image_tag post.picture.url if post.picture? %>
+            <% if post.photo %>
+              <%= image_tag post.photo.photo_data.url %>
+            <% end %>
           </div>
         </p>
       </div>

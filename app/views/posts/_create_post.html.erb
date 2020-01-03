@@ -7,13 +7,15 @@
     <%= f.submit "Post", class: "button is-primary", id: "submit-post-button" %>
     <div class="file has-name" id="file-upload" data-turbolinks="false">
       <label class="file-label">
-        <%= f.file_field :picture, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+        <%= f.fields_for :photo, Photo.new do |af| %>
+          <%= af.file_field :photo_data, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+        <% end %>
         <span class="file-cta">
-          <span class="file-label" id="post_picture_label">
+          <span class="file-label" id="post_photo_label">
             Add a photo
           </span>
         </span>
-        <span class="file-name" id="photo_name">
+        <span class="file-name" id="post_photo_name">
           no photo selected...
         </span>
       </label>

@@ -1,8 +1,4 @@
 <%= form_for(album) do |f| %>
-  <div class="subtitle is-5 has-text-centered">
-    Edit Album Info
-  </div>
-  
   <div class="field">
     <%= content_tag(:h3, "Title") %>
     <%= f.text_field :title, class: "input is-primary" %>

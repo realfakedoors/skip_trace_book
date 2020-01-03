@@ -50,10 +50,10 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
                            title:       "book of photos",
                            description: "these are pictures" )
     
-    @photo = Photo.create( album:       @album,
-                           title:       "new pic",
-                           description: "spring break",
-                           photo_data:  "picture" )
+    @photo = Photo.create( photo_attachable: @album,
+                           title:            "new pic",
+                           description:      "spring break",
+                           photo_data:       "picture" )
     
     # If you try to view a user's profile, photos, albums, posts, or edit or delete albums
     #     without permission, you'll be booted back to your home page.

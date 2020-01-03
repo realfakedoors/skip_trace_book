@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :check_for_friendship, only: :show
   
   def create
-    @post = current_user.posts.build(post_params)
+    @post  = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = "Post created!"
       redirect_to root_url
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   private
   
     def post_params
-      params.require(:post).permit(:content, :picture)
+      params.require(:post).permit(:content, :photo, photo_attributes: [:photo_data])
     end
     
     def correct_user
