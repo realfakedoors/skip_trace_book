@@ -1,0 +1,14 @@
+one:
+  user_id: RealPerson.id
+  name: MyString
+  description: MyString
+  location: MyString
+  website: MyString
+  mission: MyString
+
+two:
+  name: MyString
+  description: MyString
+  location: MyString
+  website: MyString
+  mission: MyString

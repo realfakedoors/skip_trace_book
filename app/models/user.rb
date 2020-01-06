@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :friends,     through:   :friendships
   has_many :albums,      dependent: :destroy
   has_many :photos,      through:   :albums, dependent: :destroy
+  has_many :pages
   
   # Include default devise modules. Others available are:
   # :validatable, :timeoutable, :trackable and :omniauthable
