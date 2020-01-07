@@ -2,8 +2,9 @@
   <article class="media">
     <div class="media-left">
       <figure class="image is-64x64">
-        <% if post.user.profile_picture? %>
-          <%= image_tag post.user.profile_picture.url, size: "64x64" %>
+        <% author = post.postable %>
+        <% if author.profile_picture? %>
+          <%= image_tag author.profile_picture.url, size: "64x64" %>
         <% else %>
           <%= image_tag  'blank_profile_picture', size: "64x64" %>
         <% end  %>
@@ -12,8 +13,8 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong><%= post.user.name %></strong>
-          <small><%=  post.user.email %></small><br />
+          <strong><%= author.name %></strong>
+          <small><%=  author.email %></small><br />
           <small><%=  time_ago_in_words(post.created_at) %> ago</small><br />
           <div class="post-content">
             <%= post.content %><br />
@@ -30,7 +31,7 @@
           <%= link_to "Comment",        '#', class: normal_button %>
           <%= link_to "Follow",         '#', class: normal_button %>
           <%= link_to "Friend Request", '#', class: normal_button %>
-          <% if post.user == current_user %>
+          <% if author == current_user %>
             <%= link_to "Delete", post, method: :delete, class: "button is-light has-text-danger" %>
           <% end %>
         </div>

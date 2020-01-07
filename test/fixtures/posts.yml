@@ -1,26 +1,26 @@
 freeeeeeee:
   content: "I don't feel pain anymore"
   created_at: <%= 30.minutes.ago %>
-  user: RealPerson
+  postable: RealPerson (User)
   
 cudi_montage:
   content: "Stay strong"
   created_at: <%= 3.hours.ago %>
-  user: WrongPerson
+  postable: WrongPerson (User)
   
 fire:
   content: "This is the package you ordered, huh?"
   created_at: <%= 1.year.ago %>
-  user: RealPerson
+  postable: RealPerson (User)
   
 most_recent:
   content: "Beautiful madness"
   created_at: <%= Time.now %>
-  user: RealPerson
+  postable: RealPerson (User)
   
 <% 50.times do |p| %>
 post_<%= p %>:
   content: <%= Faker::Hipster.sentence(random_words_to_add: 10) %>
   created_at: <%= 10.minutes.ago %>
-  user: RealPerson
+  postable: RealPerson (User)
 <% end %>

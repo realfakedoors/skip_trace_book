@@ -11,8 +11,8 @@ class PostTest < ActiveSupport::TestCase
     assert @post.valid?
   end
   
-  test "user id should be present" do
-    @post.user_id = nil
+  test "postable id should be present" do
+    @post.postable_id = nil
     assert_not @post.valid?
   end
   

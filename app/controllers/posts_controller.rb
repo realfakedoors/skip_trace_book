@@ -3,13 +3,12 @@ class PostsController < ApplicationController
   before_action :check_for_friendship, only: :show
   
   def create
-    @post  = current_user.posts.build(post_params)
+    @post  = Post.new(post_params)
     if @post.save
-      flash[:success] = "Post created!"
-      redirect_to root_url
+      redirect_back fallback_location: root_url, notice: "Post created!"
     else
       @feed_items = []
-      @post.errors.messages.each{ |msg| flash[:danger] = msg.last.last }
+      @post.errors.messages.each{ |msg| flash[:danger] = msg }
       redirect_to root_url
     end
   end
@@ -27,19 +26,23 @@ class PostsController < ApplicationController
   private
   
     def post_params
-      params.require(:post).permit(:content, :photo, photo_attributes: [:photo_data])
+      params.require(:post).permit(:content, 
+                                     :photo,
+                               :postable_id,
+                             :postable_type,      
+            photo_attributes: [:photo_data])
     end
     
     def correct_user
       @post = Post.find(params[:id])
-      if @post.user != current_user
-        redirect_to root_url, notice: "Invalid user permissions!"
+      if @post.postable != current_user
+        redirect_to root_url, notice: "Can't delete other people's posts!"
       end
     end
     
     def check_for_friendship
       @post   = Post.find(params[:id])
-      @author = @post.user
+      @author = @post.postable
       unless current_user == @author || @author.confirmed_friends?(current_user)
         redirect_to root_url, notice: "You're not friends with #{@author.name}."
       end

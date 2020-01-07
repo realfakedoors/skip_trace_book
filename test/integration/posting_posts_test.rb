@@ -16,21 +16,19 @@ class PostingPostsTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Post.count' do
       post posts_path, params: { post: { content: ""} }
     end
-    assert_redirected_to root_url
-    follow_redirect!
-    assert_select ".is-danger", "can't be blank"
     # Accept a valid post.
     content = "This post is awesome!"
     picture = fixture_file_upload('test/fixtures/files/rails.png', 'image/png')
     assert_difference 'Post.count', 1 do
-      post posts_path, params: { post: { content: content,
-                                         picture: picture } }
+      post posts_path, params: { post: { postable_id: @user.id,
+                                       postable_type: "User",
+                                             content: content,
+                                             picture: picture   } }
     end
     assert_redirected_to root_url
     follow_redirect!
     most_recent_post = @user.posts.first
     assert_match content, most_recent_post.content
-    assert_select ".is-success", "Post created!"
     # Delete a post.
     assert_select 'a', text: "Delete"
     assert_difference 'Post.count', -1 do

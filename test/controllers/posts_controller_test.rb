@@ -5,9 +5,9 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   
   def setup
     @wrong_post = posts(:cudi_montage)
-    @post = posts(:fire)
+    @post       = posts(:fire)
     @wrong_user = users(:WrongPerson)
-    @user = users(:RealPerson)
+    @user       = users(:RealPerson)
   end
   
   test "only a logged-in user can create or destroy posts" do
@@ -24,13 +24,15 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     # After a user signs in, they can create or destroy posts successfully.
     sign_in @user
     assert_difference 'Post.count', 1 do
-      post posts_path, params: { post: { content: "Now I'm actually logged in!", user: @user } }
+      post posts_path, params: { post: { content: "Now I'm actually logged in!", 
+                                     postable_id: @user.id,
+                                   postable_type: "User" } }
     end
     assert_difference 'Post.count', -1 do
       delete post_path(@post)
     end
     # However, they shouldn't be able to destroy other users' posts.
-    assert @wrong_post.user == @wrong_user
+    assert @wrong_post.postable == @wrong_user
     assert_no_difference 'Post.count' do
       delete post_path(@wrong_post)
     end

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   
-  has_many :posts,       dependent: :destroy
+  has_many :posts,       as: :postable, dependent: :destroy
   has_many :friendships, dependent: :destroy
   has_many :friends,     through:   :friendships
   has_many :albums,      dependent: :destroy
@@ -25,10 +25,10 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :encrypted_password, 
                     presence: true, length: { minimum: 6, maximum: 64 }
-  validate :profile_picture_size
+  validate  :profile_picture_size
                     
   def feed
-    Post.where("user_id = ?", id)
+    Post.where(postable: self)
   end
   
   def send_friend_request(other_user)
