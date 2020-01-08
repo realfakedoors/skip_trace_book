@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :set_page,     except: [:index, :new,    :create ]
+  before_action :correct_user,   only: [:edit,  :update, :destroy]
 
   def index
     @pages = Page.all
@@ -40,6 +41,12 @@ class PagesController < ApplicationController
   private
     def set_page
       @page = Page.find(params[:id])
+    end
+    
+    def correct_user
+      unless current_user == @page.admin
+        redirect_to root_url, notice: "You're not the administrator of this page."
+      end
     end
 
     def page_params

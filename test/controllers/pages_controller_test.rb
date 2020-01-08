@@ -5,7 +5,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   
   setup do
     @user = users(:RealPerson)
-    @page = pages(:one)
+    @page = pages(:WuTangClan)
     sign_in @user
   end
 

@@ -1,14 +1,7 @@
-one:
-  user_id: RealPerson.id
-  name: MyString
-  description: MyString
-  location: MyString
-  website: MyString
-  mission: MyString
-
-two:
-  name: MyString
-  description: MyString
-  location: MyString
-  website: MyString
-  mission: MyString
+WuTangClan:
+  admin: RealPerson
+  name: Wu Tang Clan Fan Page
+  description: Nothin to F With
+  location: New York, NY
+  website: ThirtySixChambers.com
+  mission: To bring peace and prosperity

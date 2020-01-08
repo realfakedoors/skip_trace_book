@@ -6,6 +6,9 @@ class User < ApplicationRecord
   has_many :albums,      dependent: :destroy
   has_many :photos,      through:   :albums, dependent: :destroy
   has_many :pages
+  has_many :followings
+  has_many :followed_pages, through: :followings, source: "page"
+  
   
   # Include default devise modules. Others available are:
   # :validatable, :timeoutable, :trackable and :omniauthable
