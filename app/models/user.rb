@@ -29,10 +29,6 @@ class User < ApplicationRecord
   validates :encrypted_password, 
                     presence: true, length: { minimum: 6, maximum: 64 }
   validate  :profile_picture_size
-                    
-  def feed
-    Post.where(postable: self)
-  end
   
   def send_friend_request(other_user)
     friends << other_user
@@ -57,6 +53,14 @@ class User < ApplicationRecord
   
   def unfriend(other_user)
     Friendship.find_by(user: self, friend: other_user).delete
+  end
+  
+  def follow(page)
+    page.followers << self
+  end
+  
+  def unfollow(page)
+    Following.find_by(user: self, page: page).delete
   end
                     
   private

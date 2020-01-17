@@ -25,7 +25,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
                                  description: "just messing around", 
                                     location: "Chicago, Illinois", 
                                      mission: "the greatest page in the world",
-                                     website: "www.thispageisthegreatest.edu",
+                                     website: "http://www.thispageisthegreatest.edu",
                                      user_id:  @user.id } }
     end
 
@@ -43,11 +43,11 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update page" do
-    patch page_url(@page), params: { page: { name: @page.name,
-                                      description: @page.description, 
-                                         location: @page.location, 
-                                          mission: @page.mission, 
-                                          website: @page.website,
+    patch page_url(@page), params: { page: { name: "Different Page Name",
+                                      description: "changed the description as well", 
+                                         location: "Village", 
+                                          mission: "to change page names everywhere", 
+                                          website: "http://www.pages.net",
                                           user_id: @user.id } }
     assert_redirected_to page_url(@page)
   end

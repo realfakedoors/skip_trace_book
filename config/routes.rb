@@ -13,12 +13,14 @@ Rails.application.routes.draw do
     member do
       get :friends
       get :albums
+      get :followed_pages
     end
   end
   
   resources       :pages
   resources      :albums
   resources      :photos, except: [:index]
+  resources  :followings, only:   [:create, :destroy]
   resources :friendships, only:   [:create, :update, :destroy]
   resources       :posts, only:   [:create, :show,   :destroy]
   

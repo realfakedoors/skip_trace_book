@@ -14,9 +14,10 @@
         <div class="navbar-start">
           <% if user_signed_in? %>
             <%= link_to "Friends",         friends_user_path(current_user), class: "navbar-item" %>
-            <%= link_to "Friend Requests", received_friend_requests_path,   class: "navbar-item" %>
+            <%= link_to "Friend Requests",   received_friend_requests_path, class: "navbar-item" %>
             <%= link_to "Albums",           albums_user_path(current_user), class: "navbar-item" %>
-            <%= link_to "Pages",     '#',                                   class: "navbar-item" %>
+            <%= link_to "My Pages", followed_pages_user_path(current_user), class: "navbar-item" %>
+            <%= link_to "All Pages",                            pages_path, class: "navbar-item" %>
             <%= link_to "Groups",    '#',                                   class: "navbar-item" %>
             <%= link_to "Messages",  '#',                                   class: "navbar-item" %>
           <% end %>

@@ -1,7 +1,6 @@
 class PhotosController < ApplicationController
-  before_action :set_photo,            except: [:new,  :create]
-  before_action :correct_user,         only:   [:edit, :update, :destroy]
-  before_action :check_for_friendship, only:    :show
+  before_action :set_photo,        except: [:new, :create]
+  before_action :photo_accessible, except: [:new, :create]
   
   def new
     @photo = Photo.new
@@ -45,19 +44,20 @@ class PhotosController < ApplicationController
       @photo = Photo.find(params[:id])
     end
     
-    def user_logged_in?
-      true if current_user == @photo.photo_attachable.user
-    end
-    
-    def check_for_friendship
-      unless user_logged_in? || @photo.photo_attachable.user.confirmed_friends?(current_user)
-        redirect_to root_url, notice: "You can't view photos of non-friends!"
+    def able_to_access_photo?(user)
+      attached =       @photo.photo_attachable
+      attached_class = @photo.photo_attachable_type
+      case attached_class
+        when "Album"
+          true if attached.user.confirmed_friends?(user)    || attached.user  == current_user
+        when "Page"
+          true if attached.followers.include?(current_user) || attached.admin == current_user
       end
     end
     
-    def correct_user
-      unless user_logged_in?
-        redirect_to root_url, notice: "That's not yours to edit!"
+    def photo_accessible
+      unless able_to_access_photo?(current_user)
+        redirect_to root_url, notice: "You can't view that photo!"
       end
     end
 end

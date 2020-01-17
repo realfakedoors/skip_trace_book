@@ -8,6 +8,7 @@ class UserTest < ActiveSupport::TestCase
                      )
     @friend = users(:RealPerson)
     @buddy  = users(:WrongPerson)
+    @page   = pages(:WuTangClan)
   end
   
   test "should be valid" do
@@ -79,5 +80,9 @@ class UserTest < ActiveSupport::TestCase
     assert_difference 'Friendship.count', -1 do
       @friend.unfriend(@buddy)
     end
+  end
+  
+  test "a user can be the administrator of a page" do
+    assert_equal @page.admin, @friend
   end
 end

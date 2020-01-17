@@ -1,42 +1,74 @@
-<%= form_with(model: page, local: true) do |form| %>
-  <% if page.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(page.errors.count, "error") %> prohibited this page from being saved:</h2>
+<div class="columns">
+  <div class="column is-one-third">    
+    <%= form_for page do |f| %>
 
-      <ul>
-      <% page.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+      <div class="field">
+        <%= content_tag(:h3, "Page Name") %>
+        <%= f.text_field :name, class: "input is-primary" %>
+      </div>
+
+      <div class="field">
+        <%= content_tag(:h3, "Description") %>
+        <%= f.text_field :description, class: "input is-primary" %>
+      </div>
+
+      <div class="field">
+        <%= content_tag(:h3, "Location") %>
+        <%= f.text_field :location, class: "input is-primary" %>
+      </div>
+
+      <div class="field">
+        <%= content_tag(:h3, "Link to Website") %>
+        <%= f.text_field :website, class: "input is-primary" %>
+      </div>
+
+      <div class="field">
+        <%= content_tag(:h3, "Mission Statement") %>
+        <%= f.text_area :mission, rows: "4", class: "textarea input is-primary" %>
+      </div>
+      
+      <div class="field is-pulled-left">
+        <div class="file has-name" id="file-upload">
+          <label class="file-label">
+            <%= f.file_field :avatar, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+            <span class="file-cta">
+              <span class="file-label" id='page_avatar_label'>
+                Change your avatar!
+              </span>
+            </span>
+            <span   class="file-name"  id="avatar_name">
+              no picture selected...
+            </span>
+          </label>
+        </div>
+      </div><br />
+
+      <div class="actions">
+        <% if    mode == "new" %>
+          <%= f.submit "Create Page",  class: "button is-primary" %>
+        <% elsif mode == "edit" %>
+          <%= f.submit "Update Page",  class: "button is-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if mode == "edit" %>
+      <%= link_to "Destroy Page", page_path(page), 
+          data: { confirm: "Are you sure?" }, 
+          method: :delete, class: "button is-warning" %>
+    <% end %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location %>
-  </div>
-
-  <div class="field">
-    <%= form.label :website %>
-    <%= form.text_field :website %>
-  </div>
-
-  <div class="field">
-    <%= form.label :mission %>
-    <%= form.text_field :mission %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+<!-- update the selected photo name. -->
+<script>
+  const fileInput = document.querySelector('#file-upload input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

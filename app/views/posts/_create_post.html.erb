@@ -3,6 +3,9 @@
     <textarea name="post[content]" id="post_content" rows="4" autofocus="true" placeholder="What's up?" class="textarea input is-primary"></textarea>
   </div>
   
+  <%= f.hidden_field :postable_id,   :value => poster.id %>
+  <%= f.hidden_field :postable_type, :value => poster.class.to_s %>
+  
   <nav class="actions">
     <%= f.submit "Post", class: "button is-primary", id: "submit-post-button" %>
     <div class="file has-name" id="file-upload" data-turbolinks="false">
@@ -20,7 +23,7 @@
         </span>
       </label>
     </div>
-  </nav> 
+  </nav>
 <% end %>
 
 <!-- update the selected photo name. -->

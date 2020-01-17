@@ -52,6 +52,11 @@ class UsersController < ApplicationController
     render 'albums/index'
   end
   
+  def followed_pages
+    @pages = @user.followed_pages.paginate(page: params[:page], per_page: 6)
+    render 'pages/index'
+  end
+  
   def received_friend_requests
     @unanswered_friendships = Friendship.where(accepted: false).where(friend_id: current_user.id).to_a
                   @requests = @unanswered_friendships.paginate(page: params[:page], per_page: 9)

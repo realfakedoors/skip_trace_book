@@ -5,7 +5,7 @@
         <%= render 'shared/user_card', user: current_user %>
       </div>
       <div class="container">
-        <%= render 'posts/create_post' %>
+        <%= render 'posts/create_post', poster: current_user %>
       </div>
     </div>
     

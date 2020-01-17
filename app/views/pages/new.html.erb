@@ -1,5 +1,3 @@
-<h1>New Page</h1>
+<%= content_tag :h2, "Create A Page", class: "title is-2" %>
 
-<%= render 'form', page: @page %>
-
-<%= link_to 'Back', pages_path %>
+<%= render 'form', page: @page, mode: "new" %>

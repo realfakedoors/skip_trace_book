@@ -1,8 +1,4 @@
-<%= form_for album.photos.build do |f| %>
-  <div class="title is-5 has-text-centered">
-    Add a photo
-  </div>
-  
+<%= form_for postable.photos.build do |f| %>
   <div class="field">
     <%= f.text_field :title,       class: "input is-primary", placeholder: "Title" %>
   </div>
@@ -31,11 +27,11 @@
     </nav>
   </div>
   
-  <%= f.hidden_field :photo_attachable_id,   :value => album.id %>
-  <%= f.hidden_field :photo_attachable_type, :value => "Album"  %>
+  <%= f.hidden_field :photo_attachable_id,   :value =>    postable.id  %>
+  <%= f.hidden_field :photo_attachable_type, :value => "#{postable.class}"  %>
         
   <div class="field">
-    <%= f.submit "Add Photo", class: "button is-primary is-fullwidth", id: "submit-photo-button" %>
+    <%= f.submit "Add A Photo", class: "button is-primary is-fullwidth", id: "submit-photo-button" %>
   </div>
 <% end %>
 

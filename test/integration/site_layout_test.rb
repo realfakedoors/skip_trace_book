@@ -19,10 +19,11 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     # A logged-in user, however, has a lot more options.
     sign_in @user
     get root_path
-    assert_select 'a[href=?]', friends_user_path(@user),        text: "Friends"
-    assert_select 'a[href=?]', received_friend_requests_path,   text: "Friend Requests"
-    assert_select 'a[href=?]',  albums_user_path(@user),        text: "Albums"
-    assert_select 'a[href=?]', '#', text: "Pages"
+    assert_select 'a[href=?]',        friends_user_path(@user), text: "Friends"
+    assert_select 'a[href=?]',   received_friend_requests_path, text: "Friend Requests"
+    assert_select 'a[href=?]',         albums_user_path(@user), text: "Albums"
+    assert_select 'a[href=?]', followed_pages_user_path(@user), text: "My Pages"
+    assert_select 'a[href=?]',                      pages_path, text: "All Pages"
     assert_select 'a[href=?]', '#', text: "Groups"
     assert_select 'a[href=?]', '#', text: "Messages"
   end
@@ -97,7 +98,6 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     # their Posts,
     get post_path(@post)
     assert_select 'div.post-content', text: @post.content
-    assert_select 'small',            text: @friend.email
     assert_select 'small',            text: "#{time_ago_in_words(@post.created_at)} ago"
     assert_select 'strong',           text: @friend.name
     # their card items,

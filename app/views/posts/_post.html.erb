@@ -3,10 +3,12 @@
     <div class="media-left">
       <figure class="image is-64x64">
         <% author = post.postable %>
-        <% if author.profile_picture? %>
-          <%= image_tag author.profile_picture.url, size: "64x64" %>
+        <% if author.class == User && author.profile_picture? %>
+          <%= image_tag  author.profile_picture.url, size: "64x64" %>
+        <% elsif author.class == Page && author.avatar? %>
+          <%= image_tag  author.avatar.url,          size: "64x64" %>
         <% else %>
-          <%= image_tag  'blank_profile_picture', size: "64x64" %>
+          <%= image_tag 'blank_profile_picture',     size: "64x64" %>
         <% end  %>
       </figure>
     </div>
@@ -14,7 +16,11 @@
       <div class="content">
         <p>
           <strong><%= author.name %></strong>
-          <small><%=  author.email %></small><br />
+          <% if author.class == "User" %>
+            <small><%=  author.email %></small><br />
+          <% elsif author.class == "Page" %>
+            <small><%=  author.description %></small><br />
+          <% end %>
           <small><%=  time_ago_in_words(post.created_at) %> ago</small><br />
           <div class="post-content">
             <%= post.content %><br />
@@ -31,7 +37,7 @@
           <%= link_to "Comment",        '#', class: normal_button %>
           <%= link_to "Follow",         '#', class: normal_button %>
           <%= link_to "Friend Request", '#', class: normal_button %>
-          <% if author == current_user %>
+          <% if author == current_user || author.class == Page && author.admin == current_user %>
             <%= link_to "Delete", post, method: :delete, class: "button is-light has-text-danger" %>
           <% end %>
         </div>

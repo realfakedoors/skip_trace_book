@@ -3,5 +3,13 @@ WuTangClan:
   name: Wu Tang Clan Fan Page
   description: Nothin to F With
   location: New York, NY
-  website: ThirtySixChambers.com
+  website: http://www.ThirtySixChambers.com
   mission: To bring peace and prosperity
+  
+Redman:
+  admin: WrongPerson
+  name: Redman Fan Page
+  description: Weed Smoker 420
+  location: New Jersey
+  website: https://www.blackoutwithmethodman.com
+  mission: raps dawg bars

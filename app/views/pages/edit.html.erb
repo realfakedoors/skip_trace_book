@@ -1,6 +1,3 @@
-<h1>Editing Page</h1>
+<%= content_tag :h2, "Edit #{@page.name}", class: "title is-2" %>
 
-<%= render 'form', page: @page %>
-
-<%= link_to 'Show', @page %> |
-<%= link_to 'Back', pages_path %>
+<%= render 'form', page: @page, mode: "edit" %>

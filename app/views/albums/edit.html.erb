@@ -4,7 +4,7 @@
       <%= render 'album_info_form', album: @album %>
     </div>
     <div class="box">
-      <%= render 'add_photo', album: @album %>
+      <%= render 'add_photo', postable: @album %>
     </div>
     <div class="level">
       <%= link_to "Delete Album", @album, method: :delete, class: "button is-danger" %>

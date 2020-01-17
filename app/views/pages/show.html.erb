@@ -1,29 +1,78 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @page.name) %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @page.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @page.description %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @page.location %>
-</p>
-
-<p>
-  <strong>Website:</strong>
-  <%= @page.website %>
-</p>
-
-<p>
-  <strong>Mission:</strong>
-  <%= @page.mission %>
-</p>
-
-<%= link_to 'Edit', edit_page_path(@page) %> |
-<%= link_to 'Back', pages_path %>
+<section class="section">
+  <div class="columns">
+    <div class="column is-half">
+      <div class="box">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-128x128">
+              <% if @page.avatar? %>
+                <%= image_tag  @page.avatar.url %>
+              <% else %>
+                <%= image_tag 'blank_profile_picture'   %>
+              <% end  %>
+            </figure>
+          </div>
+          <div class="media-content has-text-right">
+            <div class="content">
+              <%= content_tag :h1, @page.name,                    class: "title is-1" %>
+              <%= content_tag :h6, @page.description,             class: "subtitle is-6" %>
+              <%= content_tag :h6, "Location: #{@page.location}", class: "is-marginless has-text-weight-light" %>
+              <%= link_to @page.website, @page.website, target: "_blank" %>
+              <%= content_tag :h6, @page.mission,                 class: "is-marginless has-text-weight-light" %>
+              <%= content_tag :h6, "Followers: #{@page.followers.count}", class: "is-marginless has-text-weight-light" %>
+            </div>
+          </div>
+        </article>
+      </div>
+      <%= render 'follow_button' %>
+    </div>
+    <% if current_user == @page.admin %>
+      <div class="column is-half">
+        <div class="box">
+          <div class="columns">
+            <div class="column is-one-half">
+              <div class="box">
+                <%= form_for @page.posts.new do |f| %>
+                  <%= f.hidden_field :postable_id,   :value => @page.id %>
+                  <%= f.hidden_field :postable_type, :value => "Page" %>
+                  <div class="field">
+                    <%= f.text_area :content, rows: "7", class: "textarea input is-primary" %>
+                  </div>
+                  <div class="actions">
+                    <%= f.submit "Make a Post", class: "button is-primary is-fullwidth" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="column is-one-half">
+              <div class="box">
+                <%= render 'albums/add_photo', postable: @page %>
+              </div>
+              <div class="box">
+                <%= link_to "Update Group Info", edit_page_path(@page), class: "button is-light is-fullwidth" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+<%= content_tag :hr, "", class: "hr is-marginless" %>
+<section class="section">
+  <div class="columns">
+    <div class="column is-one-third">
+      <%= content_tag :h5, "#{@page.name}'s Photos", class: "title is-5" %>
+      <% if @page.photos.any? %>
+        <%= render 'shared/photo_preview', photos: @page.photos %>
+      <% end %>
+    </div>
+    <div class="column is-two-thirds">
+      <% @page.feed.each do |post| %>
+        <%= render 'posts/post', post: post %>
+      <% end %>
+    </div>
+  </div>
+</section>

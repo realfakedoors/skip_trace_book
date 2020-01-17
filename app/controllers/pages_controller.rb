@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :correct_user,   only: [:edit,  :update, :destroy]
 
   def index
-    @pages = Page.all
+    @pages = Page.all.paginate(page: params[:page], per_page: 16)
   end
 
   def show
@@ -19,9 +19,10 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(page_params)
     if @page.save
+      @page.followers << @page.admin
       redirect_to @page, notice: 'Page was successfully created.'
     else
-      render :new
+      render :new, notice: 'Unable to create page!'
     end
   end
   
@@ -50,6 +51,6 @@ class PagesController < ApplicationController
     end
 
     def page_params
-      params.require(:page).permit(:name, :description, :location, :website, :mission, :user_id)
+      params.require(:page).permit(:name, :description, :location, :website, :mission, :user_id, :avatar)
     end
 end
