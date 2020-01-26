@@ -1,0 +1,32 @@
+<% provide(:title,  title) %>
+<%= content_tag :h3, title, class: "title is-3" %>
+
+<div class="tile is-ancestor">
+  <div class="tile is-parent">
+    <% entities.each do |entity| %>
+      <div class="tile is-child is-3">
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left is-clipped">
+                <figure class="image is-96x96">
+                  <% if entity.avatar? %>
+                    <%= image_tag  entity.avatar.url        %>
+                  <% else %>
+                    <%= image_tag 'blank_profile_picture' %>
+                  <% end  %>
+                </figure>
+              </div>
+              <div class="media-content has-text-right">
+                <%= link_to entity.name, entity, class: "title is-4" %><br />
+                <%= content_tag :h6, entity.description, class: "subtitle is-6" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= will_paginate entities, renderer: BulmaPagination::Rails, class: 'is-primary' %>

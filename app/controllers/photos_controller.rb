@@ -49,9 +49,11 @@ class PhotosController < ApplicationController
       attached_class = @photo.photo_attachable_type
       case attached_class
         when "Album"
-          true if attached.user.confirmed_friends?(user)    || attached.user  == current_user
+          true if attached.user.confirmed_friends?(user)            || attached.user   == current_user
         when "Page"
-          true if attached.followers.include?(current_user) || attached.admin == current_user
+          true if attached.followers.include?(current_user)         || attached.admin  == current_user
+        when "Group"
+          true if attached.confirmed_members.include?(current_user) || attached.leader == current_user
       end
     end
     

@@ -1,0 +1,7 @@
+<% provide(:title, "Members of #{@group.name}") %>
+
+<%= content_tag :h1, "Members of #{@group.name}", class: "title is-1" %>
+
+<%= render 'shared/user_list', users: @confirmed_members %>
+
+<%= link_to "Back to #{@group.name}", @group, class: "button is-primary" %>

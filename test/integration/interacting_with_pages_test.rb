@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GroupsAndPagesTest < ActionDispatch::IntegrationTest
+class InteractingWithPagesTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   
   def setup

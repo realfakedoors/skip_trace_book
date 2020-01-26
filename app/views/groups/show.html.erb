@@ -1,0 +1,106 @@
+<% provide(:title, @group.name) %>
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-half">
+      
+      <div class="box">
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-128x128">
+              <% if @group.avatar? %>
+                <%= image_tag  @group.avatar.url %>
+              <% else %>
+                <%= image_tag 'blank_profile_picture'   %>
+              <% end  %>
+            </figure>
+          </div>
+          <div class="media-content has-text-right">
+            <div class="content">
+              <%= content_tag :h1, @group.name,                      class: "title is-1" %>
+              <%= content_tag :h6, @group.description,               class: "subtitle is-6" %>
+              <%= content_tag :h6, "Objective: #{@group.objective}", class: "is-marginless has-text-weight-light" %><br />
+              <%= link_to members_group_path do %>
+                <%= content_tag :button,
+                   "Members (#{@group.confirmed_members.count})", 
+                    class: "button is-primary" %>
+              <% end %>
+            </div>
+          </div>
+        </article>
+      </div>
+      
+      <%= content_tag :hr, "", class: "hr" %>
+      
+      <% if @group.photos.any? %>
+        <div class="box">
+          <%= render 'shared/photo_preview', photos: @group.photos %>
+        </div>
+      <% end %>
+      
+      <div class="box">
+        <div class="columns">
+          <div class="column is-half">
+            <div class="box">
+              <%= render 'albums/add_photo', postable: @group %>
+            </div>
+          </div>
+          <% if current_user == @group.leader %>
+            <div class="column is-half">
+              <div class="box">
+                <%= link_to "Edit Group Info",
+                    edit_group_path(@group), 
+                    class: "button is-primary is-outlined is-fullwidth" %>
+              </div>
+              <div class="box">
+                <%= link_to unconfirmed_members_group_path do %>
+                  <%= content_tag :button, 
+                     "Unconfirmed Members (#{@group.unconfirmed_members.count})", 
+                      class: "button is-primary is-outlined is-fullwidth" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="column is-half">
+      <div class="box">
+        <table class="table is-striped is-hoverable is-fullwidth">
+          <thead>
+            <%= content_tag :h3, "Discussions", class: "title is-3" %>
+            <th>Title</th>
+            <th>Last Message</th>
+            <th>sent at</th>
+            <th>by</th>
+          </thead>
+          <tbody>
+            <% 15.times do %>
+              <tr>
+                <td>
+                  Whoa
+                </td>
+                <td>
+                  No time for love Docta Jones! We gotta get outta here!
+                </td>
+                <td>
+                  01-06-2018 22:13
+                </td>
+                <td>
+                  User123
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="box">
+        <div class="request_membership is-flex">
+          <%= render 'request_membership_button', group: @group %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -17,17 +17,21 @@
     </div>
   </div>
   <footer class="card-footer">
-    <% card_footer_items(user).each do |item| %>
-      <p class="card-footer-item is-family-primary">
-        <span class="subtitle is-6">
-          <%= item %>
-        </span>
-      </p>
-    <% end %>
-    <% if user != current_user %>
-      <div class="card-footer-item is-family-primary">
-        <%= render 'users/friend_request_form', user: user %>
-      </div>
+    <% if local_assigns[:approval_card_footer] %>
+      <%= render 'groups/approve_membership_button', user: user %>
+    <% else %>
+      <% card_footer_items(user).each do |item| %>
+        <p class="card-footer-item is-family-primary">
+          <span class="subtitle is-6">
+            <%= item %>
+          </span>
+        </p>
+      <% end %>
+      <% if user != current_user %>
+        <div class="card-footer-item is-family-primary">
+          <%= render 'users/friend_request_form', user: user %>
+        </div>
+      <% end %>
     <% end %>
   </footer>
 </div>

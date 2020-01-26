@@ -1,0 +1,17 @@
+<div class="tile is-ancestor">
+  <% users.each_slice(3) do |column| %>
+    <div class="tile is-parent is-4 is-vertical">
+      <% column.each do |user| %>
+        <article class="tile is-child">
+          <% if local_assigns[:approval_card_footer] %>
+            <%= render 'shared/user_card', user: user, approval_card_footer: true %>
+          <% else %>
+            <%= render 'shared/user_card', user: user %>
+          <% end %>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= will_paginate users, renderer: BulmaPagination::Rails, class: 'is-primary' %>

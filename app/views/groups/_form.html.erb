@@ -1,0 +1,64 @@
+<div class="columns">
+  <div class="column is-one-third">    
+    <%= form_for group do |f| %>
+
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+
+      <div class="field">
+        <%= content_tag(:h3, "Group Name") %>
+        <%= f.text_field :name, class: "input is-primary" %>
+      </div>
+
+      <div class="field">
+        <%= content_tag(:h3, "Description") %>
+        <%= f.text_field :description, class: "input is-primary" %>
+      </div>
+
+      <div class="field">
+        <%= content_tag(:h3, "Objective") %>
+        <%= f.text_area :objective, rows: "4", class: "textarea input is-primary" %>
+      </div>
+      
+      <div class="field is-pulled-left">
+        <div class="file has-name" id="file-upload">
+          <label class="file-label">
+            <%= f.file_field :avatar, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+            <span class="file-cta">
+              <span class="file-label" id='group_avatar_label'>
+                Change your avatar!
+              </span>
+            </span>
+            <span   class="file-name"  id="avatar_name">
+              no picture selected...
+            </span>
+          </label>
+        </div>
+      </div><br />
+
+      <div class="actions">
+        <% if    mode == "new" %>
+          <%= f.submit "Create Group",  class: "button is-primary" %>
+        <% elsif mode == "edit" %>
+          <%= f.submit "Update Group",  class: "button is-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if mode == "edit" %>
+      <%= link_to "Destroy Group", group_path(group), 
+          data: { confirm: "Are you sure?" }, 
+          method: :delete, class: "button is-warning" %>
+    <% end %>
+  </div>
+</div>
+
+<!-- update the selected photo name. -->
+<script>
+  const fileInput = document.querySelector('#file-upload input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

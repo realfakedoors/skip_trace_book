@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   
-  devise_for :users
+  devise_for      :users
+  
+  resources       :pages
+  resources      :albums
+  resources      :groups
+  resources      :photos, except: [:index]
+  resources  :followings, only:   [:create, :destroy]
+  resources :memberships, only:   [:create, :update, :destroy]
+  resources :friendships, only:   [:create, :update, :destroy]
+  resources       :posts, only:   [:create, :show,   :destroy]
   
   root 'static_pages#home'
   
@@ -14,14 +23,14 @@ Rails.application.routes.draw do
       get :friends
       get :albums
       get :followed_pages
+      get :joined_groups
     end
   end
   
-  resources       :pages
-  resources      :albums
-  resources      :photos, except: [:index]
-  resources  :followings, only:   [:create, :destroy]
-  resources :friendships, only:   [:create, :update, :destroy]
-  resources       :posts, only:   [:create, :show,   :destroy]
-  
+  resources :groups do
+    member do
+      get :members
+      get :unconfirmed_members
+    end
+  end
 end

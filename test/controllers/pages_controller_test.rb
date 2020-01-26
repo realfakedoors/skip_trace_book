@@ -49,6 +49,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
                                           mission: "to change page names everywhere", 
                                           website: "http://www.pages.net",
                                           user_id: @user.id } }
+    assert @page.valid?
     assert_redirected_to page_url(@page)
   end
 

@@ -1,0 +1,9 @@
+<% if @user %>
+  <% title = "#{@user.name}'s Groups" %>
+<% else %>
+  <% title = "All Groups" %>
+<% end %>
+
+<%= render 'shared/tiled_entities', entities: @groups, title: title %>
+
+<%= link_to 'New Group', new_group_path, class: "button is-primary" %>

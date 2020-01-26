@@ -1,0 +1,7 @@
+<% provide(:title, "Unconfirmed Members of #{@group.name}") %>
+
+<%= content_tag :h1, "These users want to join #{@group.name}!", class: "title is-1" %>
+
+<%= render 'shared/user_list', users: @unconfirmed_members, approval_card_footer: true %>
+
+<%= link_to "Back to #{@group.name}", @group, class: "button is-primary" %>

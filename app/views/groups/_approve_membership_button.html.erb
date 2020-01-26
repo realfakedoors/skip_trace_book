@@ -1,0 +1,14 @@
+<p class="card-footer-item is-family-primary">
+  <span>
+    <%= form_for @group.memberships.find_by(group: @group, user: user), method: "patch" do |f| %>
+      <%= f.hidden_field :group_id,  value: @group.id %>
+      <%= f.hidden_field :user_id,   value: user.id %>
+      <%= f.submit "Accept", class: "button is-primary is-flex"  %>
+    <% end %>
+    <%= form_for @group.memberships.find_by(group: @group, user: user), method: "delete" do |f| %>
+      <%= f.hidden_field :group_id,  value: @group.id %>
+      <%= f.hidden_field :user_id,   value: user.id %>
+      <%= f.submit "Decline", class: "button is-danger is-inline"  %>
+    <% end %>
+  </span>
+</p>

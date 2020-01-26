@@ -4,37 +4,6 @@
   <% title = "All Pages" %>
 <% end %>
 
-<% provide(:title,  title) %>
-<%= content_tag :h3, title, class: "title is-3" %>
-
-<div class="tile is-ancestor">
-  <div class="tile is-parent">
-    <% @pages.each do |page| %>
-      <div class="tile is-child is-3">
-        <div class="card">
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left is-clipped">
-                <figure class="image is-96x96">
-                  <% if page.avatar? %>
-                    <%= image_tag  page.avatar.url        %>
-                  <% else %>
-                    <%= image_tag 'blank_profile_picture' %>
-                  <% end  %>
-                </figure>
-              </div>
-              <div class="media-content has-text-right">
-                <%= link_to page.name, page, class: "title is-4" %><br />
-                <%= content_tag :h6, page.description, class: "subtitle is-6" %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<%= will_paginate @pages, renderer: BulmaPagination::Rails, class: 'is-primary' %>
+<%= render 'shared/tiled_entities', entities: @pages, title: title %>
 
 <%= link_to 'New Page', new_page_path, class: "button is-primary" %>

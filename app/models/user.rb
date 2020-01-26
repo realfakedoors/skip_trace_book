@@ -1,13 +1,19 @@
 class User < ApplicationRecord
+  has_many :posts,               as: :postable,   dependent: :destroy
   
-  has_many :posts,       as: :postable, dependent: :destroy
-  has_many :friendships, dependent: :destroy
-  has_many :friends,     through:   :friendships
-  has_many :albums,      dependent: :destroy
-  has_many :photos,      through:   :albums, dependent: :destroy
+  has_many :friendships,                          dependent: :destroy
+  has_many :friends,        through: :friendships
+  
+  has_many :albums,                               dependent: :destroy
+  has_many :photos,         through: :albums,     dependent: :destroy
+  
   has_many :pages
   has_many :followings
-  has_many :followed_pages, through: :followings, source: "page"
+  has_many :followed_pages, through: :followings,    source: "page"
+  
+  has_many :groups
+  has_many :memberships
+  has_many :joined_groups,  through: :memberships,   source: "group"
   
   
   # Include default devise modules. Others available are:

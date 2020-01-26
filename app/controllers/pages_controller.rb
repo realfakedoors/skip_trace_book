@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  before_action :set_page,     except: [:index, :new,    :create ]
-  before_action :correct_user,   only: [:edit,  :update, :destroy]
+  before_action :set_page,     only: [:edit, :update, :destroy, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     @pages = Page.all.paginate(page: params[:page], per_page: 16)
@@ -51,6 +51,6 @@ class PagesController < ApplicationController
     end
 
     def page_params
-      params.require(:page).permit(:name, :description, :location, :website, :mission, :user_id, :avatar)
+      params.require(:page).permit(:user_id, :name, :description, :location, :website, :mission, :avatar)
     end
 end

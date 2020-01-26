@@ -14,7 +14,7 @@ class FollowingsController < ApplicationController
   
   private
 
-    def album_params
+    def following_params
       params.require(:following).permit(:page_id)
     end
 end

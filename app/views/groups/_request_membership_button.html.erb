@@ -1,0 +1,17 @@
+<div id="request_membership_button">
+  <% if group.confirmed_members.include?(current_user) %>
+    <%= form_for group.memberships.find_by(group: group, user: current_user), html: { method: :delete } do |f| %>
+      <%= f.hidden_field :group_id,  value: group.id %>
+      <%= f.hidden_field :user_id,   value: current_user.id %>
+      <%= f.submit "Leave Group", class: "button is-danger is-pulled-right"  %>
+    <% end %>
+  <% elsif group.members.include?(current_user) %>
+    <%= content_tag :h6, "Membership Requested!", class: "button is-warning is-pulled-right" %>
+  <% else %>
+    <%= form_for group.memberships.build do |f| %>
+      <%= f.hidden_field :group_id,  value: group.id %>
+      <%= f.hidden_field :user_id,   value: current_user.id %>
+      <%= f.submit "Request Membership",   class: "button is-primary is-pulled-right" %>
+    <% end %>
+  <% end %>
+</div>

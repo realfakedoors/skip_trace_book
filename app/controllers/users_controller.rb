@@ -57,6 +57,11 @@ class UsersController < ApplicationController
     render 'pages/index'
   end
   
+  def joined_groups
+    @groups = @user.joined_groups.paginate(page: params[:group], per_page: 8)
+    render 'groups/index'
+  end
+  
   def received_friend_requests
     @unanswered_friendships = Friendship.where(accepted: false).where(friend_id: current_user.id).to_a
                   @requests = @unanswered_friendships.paginate(page: params[:page], per_page: 9)

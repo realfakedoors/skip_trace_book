@@ -24,7 +24,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]',         albums_user_path(@user), text: "Albums"
     assert_select 'a[href=?]', followed_pages_user_path(@user), text: "My Pages"
     assert_select 'a[href=?]',                      pages_path, text: "All Pages"
-    assert_select 'a[href=?]', '#', text: "Groups"
+    assert_select 'a[href=?]',  joined_groups_user_path(@user), text: "My Groups"
+    assert_select 'a[href=?]',                     groups_path, text: "All Groups"
     assert_select 'a[href=?]', '#', text: "Messages"
   end
   
