@@ -70,26 +70,33 @@
         <table class="table is-striped is-hoverable is-fullwidth">
           <thead>
             <%= content_tag :h3, "Discussions", class: "title is-3" %>
-            <th>Title</th>
-            <th>Last Message</th>
-            <th>sent at</th>
-            <th>by</th>
+            <%= link_to "Create Discussion", new_discussion_url(group_id: @group.id), class: "button is-primary"%>
+            <th style="width: 170px; vertical-align: middle;">Title</th>
+            <th style="vertical-align: middle;">Last Message</th>
+            <th style="width: 110px; vertical-align: middle;" class="has-text-centered">sent at</th>
+            <th style="width: 110px; vertical-align: middle;" class="has-text-centered">by</th>
           </thead>
           <tbody>
-            <% 15.times do %>
+            <% @discussions.each do |discussion| %>
               <tr>
-                <td>
-                  Whoa
+                <td style="width: 170px; vertical-align: middle;">
+                  <%= link_to discussion do %>
+                    <%= content_tag :p, discussion.title, class: "is-size-6 has-text-weight-semibold" %>
+                  <% end %>
                 </td>
-                <td>
-                  No time for love Docta Jones! We gotta get outta here!
-                </td>
-                <td>
-                  01-06-2018 22:13
-                </td>
-                <td>
-                  User123
-                </td>
+                <% if discussion.messages.any? %>
+                  <td style="vertical-align: middle;">
+                    <%= content_tag :p, 
+                    discussion.messages.last.content, 
+                    class: "has-text-grey is-size-6" %>
+                  </td>
+                  <td style="width: 110px; vertical-align: middle;" class="has-text-centered">
+                    <%= content_tag :p, time_ago_in_words(discussion.messages.last.created_at), class: "is-size-6" %>
+                  </td>
+                  <td style="width: 110px; vertical-align: middle;" class="has-text-centered">
+                    <%= content_tag :p, discussion.messages.last.user.name, class: "is-size-6" %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>

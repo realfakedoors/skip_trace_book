@@ -1,0 +1,7 @@
+<p class="image is-48x48">
+  <% if message.user.profile_picture? %>
+    <%= image_tag message.user.profile_picture.url %>
+  <% else %>
+    <%= image_tag 'blank_profile_picture' %>
+  <% end %> 
+</p>

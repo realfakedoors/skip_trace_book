@@ -16,7 +16,9 @@ class Friendship < ApplicationRecord
   private
   
   def create_inverse_friendship
-    Friendship.create(user: friend, friend: user, accepted: true)
+    unless Friendship.find_by(user: friend, friend: user)
+      Friendship.create(user: friend, friend: user, accepted: true)
+    end
   end
   
   def destroy_inverse_friendship

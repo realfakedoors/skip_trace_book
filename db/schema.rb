@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_022404) do
+ActiveRecord::Schema.define(version: 2020_01_26_052502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,21 @@ ActiveRecord::Schema.define(version: 2020_01_22_022404) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_albums_on_user_id"
+  end
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.bigint "initiator_id"
+    t.bigint "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "discussions", force: :cascade do |t|
+    t.bigint "group_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_discussions_on_group_id"
   end
 
   create_table "followings", force: :cascade do |t|
@@ -62,6 +77,15 @@ ActiveRecord::Schema.define(version: 2020_01_22_022404) do
     t.boolean "confirmed", default: false
     t.index ["group_id"], name: "index_memberships_on_group_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "messageable_id"
+    t.string "messageable_type"
+    t.bigint "user_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pages", force: :cascade do |t|
@@ -122,4 +146,5 @@ ActiveRecord::Schema.define(version: 2020_01_22_022404) do
   end
 
   add_foreign_key "albums", "users"
+  add_foreign_key "discussions", "groups"
 end

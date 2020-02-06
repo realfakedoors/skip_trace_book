@@ -15,6 +15,10 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :joined_groups,  through: :memberships,   source: "group"
   
+  has_many :direct_messages
+  has_many :messages,       through: :direct_messages
+  has_many :messages,       through: :discussions
+  
   
   # Include default devise modules. Others available are:
   # :validatable, :timeoutable, :trackable and :omniauthable

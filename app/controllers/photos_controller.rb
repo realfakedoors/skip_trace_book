@@ -37,7 +37,11 @@ class PhotosController < ApplicationController
   private
 
     def photo_params
-      params.require(:photo).permit(:photo_data, :title, :description, :photo_attachable_id, :photo_attachable_type)
+      params.require(:photo).permit(:photo_data, 
+                                         :title, 
+                                   :description, 
+                           :photo_attachable_id, 
+                         :photo_attachable_type)
     end
     
     def set_photo
@@ -49,11 +53,17 @@ class PhotosController < ApplicationController
       attached_class = @photo.photo_attachable_type
       case attached_class
         when "Album"
-          true if attached.user.confirmed_friends?(user)            || attached.user   == current_user
+          true if attached.user.confirmed_friends?(user) || attached.user == current_user
         when "Page"
-          true if attached.followers.include?(current_user)         || attached.admin  == current_user
+          true if attached.followers.include?(current_user) || attached.admin == current_user
         when "Group"
           true if attached.confirmed_members.include?(current_user) || attached.leader == current_user
+        when "Message"
+          if attached.messageable_type    == "DirectMessage"
+            true if attached.messageable.recipient == current_user || attached.messageable.initiator == current_user
+          elsif attached.messageable_type == "Discussion"
+            true if attached.messageable.group.confirmed_members.include?(current_user)
+          end
       end
     end
     

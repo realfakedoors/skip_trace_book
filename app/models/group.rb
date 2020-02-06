@@ -1,11 +1,11 @@
 class Group < ApplicationRecord
-  belongs_to :leader, class_name: "User",  foreign_key: "user_id"
+  belongs_to :leader, class_name: "User", foreign_key: "user_id"
   
   has_many :memberships
-  has_many :members, through: :memberships,     source: "user"
+  has_many :members, through: :memberships, source: "user"
   
-  #has_many :discussions
-  #has_many :messages through: :discussions
+  has_many :discussions, dependent: :destroy
+  has_many :messages, through: :discussions
   
   has_many :photos, as:  :photo_attachable, dependent: :destroy
   

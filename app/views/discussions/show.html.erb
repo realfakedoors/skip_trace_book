@@ -1,0 +1,35 @@
+<% provide(:title, @discussion.title) %>
+
+<%= content_tag :h1, @discussion.title, class: "title is-1 has-text-centered" %>
+
+<%= content_tag :hr, "", class: "hr" %>
+
+<div class="container">
+  <%= will_paginate @messages, renderer: BulmaPagination::Rails, class: 'is-primary' %>
+</div>
+
+<%= content_tag :hr, "", class: "hr" %>
+
+<div class="container">
+  <div class="box">
+    <% @messages.each do |message| %>
+      <div class="box">
+        <article class="media">
+          <div class="media-left">
+            <%= render 'messages/message_profile_picture', message: message %>
+          </div>
+          <div class="media-content has-text-left">
+            <%= render 'messages/message_content',         message: message %>
+          </div>
+          <div class="media-content">
+            <% if message.photo %>
+              <%= render 'messages/message_photo',           photo: message.photo %>
+            <% end %>
+          </div>
+        </article>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'messages/new_message_form', id: @discussion.id, type: "Discussion" %>

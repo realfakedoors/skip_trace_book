@@ -7,6 +7,7 @@ class InteractingWithGroupsTest < ActionDispatch::IntegrationTest
       @neophyte = users(:WrongPerson)
           @user = users(:RealPerson)
          @group = groups(:Ballers)
+    @discussion = discussions(:StanleyCup)
     @photo_data = fixture_file_upload('test/fixtures/files/rails.png', 'image/png')
   end
   
@@ -17,10 +18,13 @@ class InteractingWithGroupsTest < ActionDispatch::IntegrationTest
     # General group information.
     get group_path(@group)
     assert_response :success
-    assert_select "h1", text: @group.name
-    assert_select "h6", text: @group.description
-    assert_select "h6", text: "Objective: #{@group.objective}"
-    assert_select "button", text: "Members (#{@group.confirmed_members.count})"
+    assert_select "h1",       text: @group.name
+    assert_select "h6",       text: @group.description
+    assert_select "h6",       text: "Objective: #{@group.objective}"
+    assert_select "button",   text: "Members (#{@group.confirmed_members.count})"
+    assert_select "h3.title", text: "Discussions"
+    assert_select "a",        text: @discussion.title
+    assert_select "p",        text: @discussion.messages.last.content
     
     # All groups index.
     get groups_path

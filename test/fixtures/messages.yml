@@ -1,0 +1,9 @@
+direct_message:
+  messageable: dm (DirectMessage)
+  user: RealPerson
+  content: Slide in the DMs
+  
+discussion_message:
+  messageable: StanleyCup (Discussion)
+  user: RealPerson
+  content: Hey guys I'm awesome

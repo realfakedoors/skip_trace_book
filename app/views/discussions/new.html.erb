@@ -1,0 +1,64 @@
+<div class="columns">
+  <div class="column is-half">
+    <div class="container">
+      <%= form_for @discussion do |f| %>
+
+        <%= f.hidden_field :group_id, :value => params[:group_id] %>
+        
+        <div class="field">
+          <%= content_tag(:h3, "Title") %>
+          <%= f.text_field :title, class: "input is-primary" %>
+        </div>
+        
+        <%= f.fields_for :messages do |m| %>
+          <%= m.hidden_field :user_id, :value => current_user.id %>
+          
+          <%= m.hidden_field :messageable_type, :value => "Discussion" %>
+          <%= m.hidden_field :messageable_id,   :value => @discussion.id %>
+          
+          <div class="field">
+            <%= m.text_area :content, rows: "4", class: "textarea input is-primary", placeholder: "What's on your mind?" %>
+          </div>
+          
+          <%= m.fields_for :photo do |p| %>
+            <%= p.hidden_field :photo_attachable_type, :value => "Message" %>
+            <%= p.hidden_field :photo_attachable_id,   :value => @discussion.messages.last.id %>
+            
+            <div class="field is-pulled-left">
+              <div class="file has-name" id="file-upload">
+                <label class="file-label">
+                  <%= p.file_field :photo_data, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+                  <span class="file-cta">
+                    <span class="file-label" id='message_photo_label'>
+                      Add a photo!
+                    </span>
+                  </span>
+                  <span class="file-name" id="photo_name">
+                    no picture selected...
+                  </span>
+                </label>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        
+        <div class="actions">
+          <%= f.submit "Create Discussion",  class: "button is-primary" %>
+        </div>
+        
+      <% end %>
+    </div>
+  </div>
+  <%= content_tag :div, "", class: "column is-half" %>
+</div>
+
+<!-- update the selected photo name. -->
+<script>
+  const fileInput = document.querySelector('#file-upload input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

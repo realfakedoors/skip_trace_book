@@ -1,15 +1,19 @@
-<% provide(:title, 'All users') %>
+<% provide(:title, 'Find Friends') %>
 
-<p id="notice"><%= notice %></p>
+<%= content_tag :h1, "Find Friends", class: "title is-1" %>
 
-<%= will_paginate @users, renderer: BulmaPagination::Rails, class: 'is-primary' %>
+<%= content_tag :hr, "", class: "hr" %>
 
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %>
-    </li>
+<div class="tile is-ancestor">
+  <% @users.each_slice(3) do |column| %>
+    <div class="tile is-parent is-4 is-vertical">
+      <% column.each do |user| %>
+        <article class="tile is-child">
+          <%= render 'shared/user_card',   user: user %><br />
+        </article>
+      <% end %>
+    </div>
   <% end %>
-</ul>
+</div>
 
 <%= will_paginate @users, renderer: BulmaPagination::Rails, class: 'is-primary' %>

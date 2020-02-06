@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   before_action :check_for_friendship,   only: [:friends, :albums, :show]
 
   def index
-    @users = User.paginate(page: params[:page])
+    not_yet_friends = User.all.reject do |user|
+      Friendship.find_by(user: current_user, friend: user)
+    end
+    
+    @users = not_yet_friends.paginate(page: params[:page], per_page: 9)
   end
   
   def show

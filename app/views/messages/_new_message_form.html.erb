@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="box">
+    <div class="columns">
+      <div class="column is-half">
+        <%= form_for @message do |f| %>
+          <div class="field">
+            <textarea name="message[content]" id="message_content" rows="4" autofocus="true" placeholder="Enter a Message (1000 characters max)" class="textarea input is-primary"></textarea>
+          </div>
+          
+          <%= f.hidden_field :messageable_id,   :value => id   %>
+          <%= f.hidden_field :messageable_type, :value => type %>
+     
+          <nav class="actions">
+            <%= f.submit "Send", class: "button is-primary", id: "submit-post-button" %>
+            <div class="file has-name" id="file-upload" data-turbolinks="false">
+              <label class="file-label">
+                <%= f.fields_for :photo, Photo.new do |af| %>
+                  <%= af.file_field :photo_data, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+                <% end %>
+                <span class="file-cta">
+                  <span class="file-label" id="message_photo_label">
+                    Add a photo
+                  </span>
+                </span>
+                <span class="file-name" id="message_photo_name">
+                  no photo selected...
+                </span>
+              </label>
+            </div>
+          </nav>
+        <% end %>
+      </div>
+      <%= content_tag :div, "", class: "column is-half" %>
+    </div>
+  </div>
+</div>
+
+<!-- update the selected photo name. -->
+<script>
+  const fileInput = document.querySelector('#file-upload input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

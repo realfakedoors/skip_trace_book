@@ -1,0 +1,58 @@
+<% provide(:title, "Direct Messages") %>
+
+<div class="container">  
+  <div class="box">
+    <table class="table is-striped is-hoverable is-narrow is-fullwidth">
+      
+      <thead>
+        <div class="dm-index-table-header">
+          <span class="title">
+            <%= content_tag :h1, "Direct Messages", class: "title is-1" %>
+          </span>
+          <span class="compose-dm-button">
+            <%= link_to "Compose", new_direct_message_url, class: "button is-primary" %>
+          </span>
+        </div><br />
+      </thead>
+      
+      <tbody>
+        <% @direct_messages.each do |dm| %>
+        <% other_user = dm.other_user(current_user) %>
+          <tr>
+            <td style="width: 55px; vertical-align: middle;" class="has-text-centered">
+              <div class="profile_picture image is-48x48">
+                <% if other_user.profile_picture? %>
+                  <%= image_tag other_user.profile_picture.url %>
+                <% else %>
+                  <%= image_tag 'blank_profile_picture' %>
+                <% end %>
+              </div>
+            </td>
+            
+            <td style="width: 170px; vertical-align: middle;" class="has-text-centered">
+              <%= content_tag :p, other_user.name, class: "is-size-6 has-text-weight-semibold" %>
+            </td>
+            
+            <td style="vertical-align: middle;">
+              <%= link_to dm do %>
+                <%= content_tag :p, 
+                dm.messages.last.content, 
+                class: "has-text-grey is-size-6" %>
+              <% end %>
+            </td>
+            
+            <td style="width: 110px; vertical-align: middle;" class="has-text-centered">
+              <%= content_tag :p, time_ago_in_words(dm.messages.last.created_at), class: "is-size-6" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      
+    </table>
+  </div>
+  <% if @direct_messages.count > 15 %>
+    <div class="box">
+      <%= will_paginate @direct_messages, renderer: BulmaPagination::Rails, class: 'is-primary' %>
+    </div>
+  <% end %>
+</div>

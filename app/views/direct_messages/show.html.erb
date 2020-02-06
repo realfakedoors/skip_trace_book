@@ -1,0 +1,63 @@
+<% provide(:title, @direct_message.other_user(current_user).name) %>
+
+<%= content_tag :h1, @direct_message.other_user(current_user).name, class: "title is-1 has-text-centered" %>
+
+<%= content_tag :hr, "", class: "hr" %>
+
+<div class="container">
+  <%= will_paginate @messages, renderer: BulmaPagination::Rails, class: 'is-primary' %>
+</div>
+
+<%= content_tag :hr, "", class: "hr" %>
+
+<div class="container">
+  <div class="box">
+    <% @messages.each do |message| %>
+      <% if message.user != current_user %>
+        <div class="columns">
+          <%= content_tag :div, "", class: "column is-half" %>
+          <div class="column is-half">
+            <div class="box">
+              <article class="media">
+                <% if message.photo %>
+                  <div class="media-left">
+                    <%= render 'messages/message_photo', photo: message.photo %>
+                  </div>
+                <% end %>
+                <div class="media-content has-text-right">
+                  <%= render 'messages/message_content',         message: message %>
+                </div>
+                <figure class="media-right">
+                  <%= render 'messages/message_profile_picture', message: message %>
+                </figure>
+              </article>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="columns">
+          <div class="column is-half">
+            <div class="box has-background-light">
+              <article class="media">
+                <figure class="media-left">
+                  <%= render 'messages/message_profile_picture', message: message %>
+                </figure>
+                <div class="media-content has-text-primary">
+                  <%= render 'messages/message_content',         message: message %>
+                </div>
+                <% if message.photo %>
+                  <div class="media-right">
+                    <%= render 'messages/message_photo', photo: message.photo %>
+                  </div>
+                <% end %>
+              </article>
+            </div>
+          </div>
+          <%= content_tag :div, "", class: "column is-half" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'messages/new_message_form', id: @direct_message.id, type: "DirectMessage" %>

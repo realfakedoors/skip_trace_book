@@ -1,5 +1,11 @@
 <% provide(:title, "Friend Requests Received") %>
 
+<%= content_tag :h1, "Friend Requests Received", class: "title is-1" %>
+
+<%= link_to "Find More Friends", users_url, class: "button is-primary" %>
+
+<%= content_tag :hr, "", class: "hr" %>
+
 <div class="tile is-ancestor">
   <% @requests.each_slice(3) do |column| %>
     <div class="tile is-parent is-4 is-vertical">

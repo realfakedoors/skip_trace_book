@@ -1,0 +1,78 @@
+<% provide(:title, "New Direct Message") %>
+
+<%= content_tag :h1, "New Direct Message", class: "title is-1" %>
+
+<%= content_tag :hr, "", class: "hr" %>
+
+<div class="container">
+  <%= form_for @direct_message do |f| %>
+  
+    <%= f.hidden_field :initiator_id, :value => current_user.id %>
+    
+    <% if @friends.any? %>
+      <div class="field">
+        <%= content_tag(:h3, "Send To:") %>
+        <div class="select">
+          <%= f.select(:recipient_id) do %>
+            <% @friends.each do |friend| %>
+              <%= content_tag(:option, friend.name, value: friend.id) %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      
+        <%= f.fields_for :messages do |m| %>
+          <%= m.hidden_field :user_id, :value => current_user.id %>
+          
+          <%= m.hidden_field :messageable_type, :value => "DirectMessage" %>
+          <%= m.hidden_field :messageable_id,   :value => @direct_message.id %>
+          
+          <div class="field">
+            <%= m.text_area :content, rows: "4", class: "textarea input is-primary" %>
+          </div>
+          
+          <%= m.fields_for :photo do |p| %>
+            <%= p.hidden_field :photo_attachable_type, :value => "Message" %>
+            <%= p.hidden_field :photo_attachable_id,   :value => @direct_message.messages.last.id %>
+            
+            <div class="field is-pulled-left">
+              <div class="file has-name" id="file-upload">
+                <label class="file-label">
+                  <%= p.file_field :photo_data, accept: 'image/jpeg, image/png', class: "is-hidden" %>
+                  <span class="file-cta">
+                    <span class="file-label" id='message_photo_label'>
+                      Add a photo!
+                    </span>
+                  </span>
+                  <span class="file-name" id="photo_name">
+                    no picture selected...
+                  </span>
+                </label>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        
+      <div class="actions">
+        <%= f.submit "Send Message", class: "button is-primary" %>
+      </div>
+      
+    <% else %>
+      <div class="title">
+        <%= content_tag :h3, "No friends are available to message!", class: "title is-3" %><br />
+      </div>
+    <% end %>
+  
+  <% end %>
+</div>
+
+<!-- update the selected photo name. -->
+<script>
+  const fileInput = document.querySelector('#file-upload input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-upload .file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
+</script>

@@ -26,7 +26,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]',                      pages_path, text: "All Pages"
     assert_select 'a[href=?]',  joined_groups_user_path(@user), text: "My Groups"
     assert_select 'a[href=?]',                     groups_path, text: "All Groups"
-    assert_select 'a[href=?]', '#', text: "Messages"
+    assert_select 'a[href=?]',            direct_messages_path, text: "Direct Messages"
   end
   
   test "user profiles display correctly" do
