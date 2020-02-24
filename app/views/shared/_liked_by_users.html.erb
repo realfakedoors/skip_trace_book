@@ -1,0 +1,28 @@
+<% if resource.likes.count > 0 %>
+  <div class="box">
+    <%= content_tag :h2, "Liked By:", class: "title is-2 has-text-centered" %>
+    <%= content_tag :hr, "", class: "hr" %>
+    <% resource.likes.each do |like| %>
+      <% if like.user %>
+        <%= link_to like.user do %>
+          <div class="box">
+            <nav class="level">
+              <div class="level-left">
+                <figure class="image is-64x64">
+                  <% if like.user.profile_picture? %>
+                    <%= image_tag like.user.profile_picture.url %>
+                  <% else %>
+                    <%= image_tag 'blank_profile_picture' %>
+                  <% end  %>
+                </figure>
+              </div>
+              <div class="level-right has-text-right">
+                <%= content_tag :h3, like.user.name, class: "subtitle is-3" %>
+              </div>
+            </nav>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

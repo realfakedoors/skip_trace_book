@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
-  before_action :correct_user,         only: :destroy
-  before_action :check_for_friendship, only: :show
+  before_action :correct_user,         only:    :destroy
+  before_action :check_for_friendship, except: [:create, :destroy]
+  before_action :set_post,             except:  :create
   
   def create
     @post  = Post.new(post_params)
@@ -14,10 +15,10 @@ class PostsController < ApplicationController
   end
   
   def show
+    @comments = @post.comments.paginate(page: params[:page], per_page: 10)
   end
     
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     flash[:success] = "Post deleted"
     redirect_to root_url
@@ -33,6 +34,10 @@ class PostsController < ApplicationController
             photo_attributes: [:photo_data])
     end
     
+    def set_post
+      @post = Post.find(params[:id])
+    end
+    
     def correct_user
       @post = Post.find(params[:id])
       if @post.postable != current_user
@@ -43,8 +48,11 @@ class PostsController < ApplicationController
     def check_for_friendship
       @post   = Post.find(params[:id])
       @author = @post.postable
-      unless current_user == @author || @author.confirmed_friends?(current_user)
-        redirect_to root_url, notice: "You're not friends with #{@author.name}."
+      
+      if @author.class.to_s == "User"
+        unless current_user == @author || @author.confirmed_friends?(current_user)
+          redirect_to root_url, notice: "You're not friends with #{@author.name}."
+        end
       end
     end
 end

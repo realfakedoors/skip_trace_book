@@ -83,8 +83,8 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     sign_in @user
     # their Photos,
     get photo_path(@photo)
-    assert_select 'h2.title',    text: @photo.title
-    assert_select 'h4.subtitle', text: @photo.description
+    assert_select 'p.title',     text: @photo.title
+    assert_select 'div.content', text: @photo.description
     # their Albums,
     get albums_user_path(@friend)
     assert_select 'p.title',       text: "#{@friend.name}'s Albums"
@@ -95,7 +95,6 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select 'div.title',     text: @album.title
     assert_select 'div.subtitle',  text: @album.description
     assert_select 'div.subtitle',  text: "by #{@friend.name}"
-    
     # their Posts,
     get post_path(@post)
     assert_select 'div.post-content', text: @post.content

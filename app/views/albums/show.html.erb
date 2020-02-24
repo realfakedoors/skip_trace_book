@@ -20,7 +20,8 @@
       <% column.each do |photo| %>
         <% if photo.id %>
           <article class="tile is-child">
-            <%= render 'photos/photo_card', photo: photo, edit: "off" %>
+            <%= render 'photos/photo_card',       photo: photo, edit: "off" %>
+            <%= render 'shared/content_footer', content: photo, creator: photo.photo_attachable %>
           </article>
         <% end %>
       <% end %>

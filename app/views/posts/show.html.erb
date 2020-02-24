@@ -3,12 +3,18 @@
     <%= render 'shared/user_card', user: @author %>
   </div>
   <div class="column is-two-thirds">
-    <article class="media">
-      <div class="media-content">
-        <div class="content">
-          <%= render 'post', post: @post %>
-        </div>
-      </div>
-    </article>
+    <%= render 'post', post: @post %>
+  </div>
+</div>
+
+<%= content_tag :hr, "", class: "hr" %>
+
+<div class="columns">
+  <div class="column is-one-third">
+    <%= render 'shared/liked_by_users', resource: @post %>
+  </div>
+  <div class="column is-two-thirds">
+    <%= render 'shared/comment_feed', comments: @comments %>
+    <%= render 'shared/comment_form', resource: @post %>
   </div>
 </div>

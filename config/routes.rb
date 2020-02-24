@@ -5,14 +5,16 @@ Rails.application.routes.draw do
   resources           :pages
   resources          :albums
   resources          :groups
-  resources          :photos, except: [:index]
   resources      :followings, only:   [:create, :destroy]
+  resources           :likes, only:   [:create, :destroy]
+  resources        :comments, only:   [:create, :destroy]
   resources     :memberships, only:   [:create, :update, :destroy]
   resources     :friendships, only:   [:create, :update, :destroy]
   resources           :posts, only:   [:create, :show,   :destroy]
   resources        :messages, only:   [:create, :show,   :destroy]
   resources     :discussions, except: [:edit,   :update, :index]
   resources :direct_messages, except: [:edit,   :update]
+  resources          :photos, except: [:index]
   
   
   root 'static_pages#home'
@@ -35,6 +37,12 @@ Rails.application.routes.draw do
     member do
       get :members
       get :unconfirmed_members
+    end
+  end
+  
+  resources :photos do
+    member do
+      get :photo_modal
     end
   end
 end

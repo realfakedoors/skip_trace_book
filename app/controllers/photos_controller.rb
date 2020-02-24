@@ -7,6 +7,7 @@ class PhotosController < ApplicationController
   end
 
   def show
+    @comments = @photo.comments.paginate(page: params[:page], per_page: 10)
   end
 
   def create
@@ -32,6 +33,9 @@ class PhotosController < ApplicationController
   def destroy
     @photo.destroy
     redirect_back fallback_location: root_url, notice: 'Photo was successfully destroyed.'
+  end
+  
+  def photo_modal
   end
 
   private

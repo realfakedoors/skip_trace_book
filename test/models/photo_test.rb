@@ -20,13 +20,13 @@ class PhotoTest < ActiveSupport::TestCase
   end
   
   test "photo can belong to an album or a post" do
-    @album_photo = Photo.new(photo_attachable_id:   @album.id,
-                             photo_attachable_type: "Album")
-    assert @album_photo.valid?
+    album_photo = Photo.new(photo_attachable_id:   @album.id,
+                            photo_attachable_type: "Album")
+    assert album_photo.valid?
     
-    @post_photo  = Photo.new(photo_attachable_id:   @post.id,
-                             photo_attachable_type: "Post")
-    assert @post_photo.valid?
+    post_photo  = Photo.new(photo_attachable_id:   @post.id,
+                            photo_attachable_type: "Post")
+    assert post_photo.valid?
   end
 
 end

@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @pages = Page.all.paginate(page: params[:page], per_page: 16)
+    @pages = Page.all.paginate(page: params[:page], per_page: 9)
   end
 
   def show

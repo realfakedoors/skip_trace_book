@@ -1,0 +1,15 @@
+<div id="heart_button">
+  <% if content.likes.map{|l| l.user}.include?(current_user) %>
+    <%= form_for content.likes.find_by(user: current_user), html: { method: :delete } do |f| %>
+      <%= image_submit_tag "filled_in_heart", class: "image is-24x24" %>
+    <% end %>
+  <% else %>
+    <%= form_for content.likes.build do |f| %>
+      <%= f.hidden_field :likable_id,   value: content.id %>
+      <%= f.hidden_field :likable_type, value: content.class.to_s %>
+      <%= image_submit_tag "blank_heart", class: "image is-24x24" %>
+    <% end %>
+  <% end  %>
+</div>
+
+<%= "(#{content.likes.count})" %>

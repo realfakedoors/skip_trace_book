@@ -1,15 +1,19 @@
-<div class="modal is-active">
-  <div class="modal-background"></div>
-  <div class="modal-content">
-    <p class="image is-4by3">
-      <% if @photo.photo_data? %>
-        <%= image_tag @photo.photo_data.url %>
-      <% end %>
-      <%= content_tag :h2, @photo.title,       class: "title is-2 has-text-white" %>
-      <%= content_tag :h4, @photo.description, class: "subtitle is-4 has-text-white" %>
-    </p>
+<% if @photo.id %>
+  <div class="columns">
+    <%= content_tag :div, "", class: "column is-one-third" %>
+    <div class="column is-two-thirds">
+      <%= render 'photos/photo_card',       photo: @photo, edit: "off" %>
+      <%= render 'shared/content_footer', content: @photo, creator: @photo.photo_attachable %>
+    </div>
   </div>
-  <%= link_to :back do %>
-    <button class="modal-close is-large" aria-label="close"></button>
-  <% end %>
+<% end %>
+
+<div class="columns">
+  <div class="column is-one-third">
+    <%= render 'shared/liked_by_users', resource: @photo %>
+  </div>
+  <div class="column is-two-thirds">
+    <%= render 'shared/comment_feed', comments: @comments %>
+    <%= render 'shared/comment_form', resource: @photo %>
+  </div>
 </div>

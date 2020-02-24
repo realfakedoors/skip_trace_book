@@ -1,0 +1,16 @@
+<%= form_for resource.comments.new do |f| %>
+  <div class="box">
+    <div class="field">
+      <%= f.text_field :content, 
+          placeholder: "enter a comment between 5-200 characters...", 
+          class: "input is-primary" %>
+    </div>
+    
+    <%= f.hidden_field :commentable_id, :value => resource.id %>
+    <%= f.hidden_field :commentable_type, :value => resource.class.to_s %>
+    
+    <div class="actions">
+      <%= f.submit "Comment", class: "button is-primary" %>
+    </div>
+  </div>
+<% end %>

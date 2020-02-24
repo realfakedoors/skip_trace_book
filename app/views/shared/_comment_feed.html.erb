@@ -1,0 +1,38 @@
+<% if comments.count > 0 %>
+  <div class="box">
+    <%= content_tag :h2, "Comments", class: "title is-2 has-text-centered" %>
+    <%= content_tag :hr, "", class: "hr" %>
+    <% comments.each do |comment| %>
+      <div class="box">
+        <nav class="columns is-vcentered">
+          <%= link_to comment.user do %>
+          <div class="column">
+            <figure class="image is-64x64">
+              <% if comment.user.profile_picture? %>
+                <%= image_tag comment.user.profile_picture.url %>
+              <% else %>
+                <%= image_tag 'blank_profile_picture' %>
+              <% end  %>
+            </figure>
+            <%= content_tag :h3, comment.user.name,  class: "subtitle is-3" %>
+          </div>
+          <% end %>
+          <div class="column has-text-right">
+            <%= content_tag  :p, comment.content,    class: "subtitle is-5" %>
+          </div>
+        </nav>
+        <nav class="level">
+          <div class="level-left">
+            <%= render 'shared/heart_button', content: comment %>
+          </div>
+          <div class="level-right has-text-right">
+            <%= content_tag :p, 
+               "#{time_ago_in_words(comment.created_at)} ago",
+                class: "subtitle is-7" %>
+          </div>
+        </nav>
+      </div>
+    <% end %>
+    <%= will_paginate comments, renderer: BulmaPagination::Rails, class: 'is-primary' %>
+  </div>
+<% end %>

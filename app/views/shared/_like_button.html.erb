@@ -1,0 +1,14 @@
+<div id="like_button">
+  <% liked_by = "(#{content.likes.count})" %>
+  <% if content.likes.map{|l| l.user}.include?(current_user) %>
+    <%= form_for content.likes.find_by(user: current_user), html: { method: :delete } do |f| %>
+      <%= f.submit "Unlike #{liked_by}", class: "button is-danger" %>
+    <% end %>
+  <% else %>
+    <%= form_for content.likes.build do |f| %>
+      <%= f.hidden_field :likable_id,   value: content.id %>
+      <%= f.hidden_field :likable_type, value: content.class.to_s %>
+      <%= f.submit "Like #{liked_by}",   class: "button is-primary" %>
+    <% end %>
+  <% end %>
+</div>

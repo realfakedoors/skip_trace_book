@@ -1,7 +1,14 @@
 <div class="content">
   <%= content_tag :h7, message.user.name, class: "is-size-7 has-text-weight-bold" %>
   <%= content_tag :h6, message.content,   class: "is-size-6 has-text-weight-light" %>
-  <%= content_tag :span, 
-        "#{message.created_at} (#{time_ago_in_words(message.created_at)} ago)",
-        class: "is-size-7 has-text-weight-bold" %>
+  <nav class="level">
+    <div class="level-left">
+      <%= render 'shared/heart_button', content: message %>
+    </div>
+    <div class="level-right">
+      <%= content_tag :span, 
+         "#{time_ago_in_words(message.created_at)} ago",
+          class: "is-size-7 has-text-weight-bold" %>
+    </div>
+  </nav>
 </div>

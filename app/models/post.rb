@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :postable, polymorphic: true
   
+  has_many    :likes, as:     :likable, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
+  
   has_one    :photo, as: :photo_attachable, dependent: :destroy
   
   accepts_nested_attributes_for :photo

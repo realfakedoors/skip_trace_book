@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy, :unconfirmed_members]
 
   def index
-    @groups = Group.all.paginate(page: params[:page], per_page: 20)
+    @groups = Group.all.paginate(page: params[:page], per_page: 9)
   end
 
   def show

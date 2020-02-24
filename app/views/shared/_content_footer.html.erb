@@ -1,0 +1,13 @@
+<nav class="level is-mobile">
+  <div class="buttons are-small">
+    <%= render 'shared/like_button', content: content %>
+    <%= link_to content do %>
+      <%= content_tag :div, 
+         "Comments (#{content.comments.count})", 
+          class: "button is-primary" %>
+    <% end %>
+    <% if creator == current_user %>
+      <%= link_to "Delete", content, method: :delete, class: "button is-light has-text-danger" %>
+    <% end %>
+  </div>
+</nav>

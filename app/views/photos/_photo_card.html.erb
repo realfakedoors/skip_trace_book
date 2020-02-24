@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-image">
-    <figure class="image is-4by3">
-      <%= link_to photo do %>
+    <figure class="image">
+      <%= link_to photo_modal_photo_path(photo) do %>
         <% if photo.photo_data? %>
           <%= image_tag photo.photo_data.url %>
         <% end %>

@@ -19,6 +19,9 @@ class User < ApplicationRecord
   has_many :messages,       through: :direct_messages
   has_many :messages,       through: :discussions
   
+  has_many :likes,                                dependent: :destroy
+  has_many :comments,                             dependent: :destroy
+  
   
   # Include default devise modules. Others available are:
   # :validatable, :timeoutable, :trackable and :omniauthable
