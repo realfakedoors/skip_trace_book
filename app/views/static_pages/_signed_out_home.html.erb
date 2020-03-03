@@ -1,17 +1,51 @@
 <section class="hero">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title">
+      <h1 class="title has-text-centered is-1">
         Welcome to SkipTraceBook!
       </h1>
-      <h2 class="subtitle">
+      <h2 class="subtitle has-text-centered is-4">
         a social network built for connectivity.
       </h2>
     </div>
   </div>
 </section>
+
 <section class="section">
   <div class="container">
-    What we offer:
+    <div class="tile is-ancestor is-vertical">
+      <div class="tile is-parent">
+        <% @top_row.each do |tour_item| %>
+          <div class="tile is-child is-4">
+            <div class="box">
+              <h1 class="title has-text-centered is-3">
+                <%= tour_item.first %>
+              </h1>
+              <figure class="image is-4by3">
+                <%= link_to tour_item.last do %>
+                  <%= image_tag "#{tour_item.last}" %>
+                <% end %>
+              </figure>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="tile is-parent">
+        <% @bottom_row.each do |tour_item| %>
+          <div class="tile is-child is-4">
+            <div class="box">
+              <h1 class="title has-text-centered is-3">
+                <%= tour_item.first %>
+              </h1>
+              <figure class="image is-4by3">
+                <%= link_to tour_item.last do %>
+                  <%= image_tag "#{tour_item.last}" %>
+                <% end %>
+              </figure>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </section>

@@ -17,9 +17,9 @@
           </div>
           <div class="media-content has-text-right">
             <div class="content">
-              <%= content_tag :h1, @group.name,                      class: "title is-1" %>
-              <%= content_tag :h6, @group.description,               class: "subtitle is-6" %>
-              <%= content_tag :h6, "Objective: #{@group.objective}", class: "is-marginless has-text-weight-light" %><br />
+              <%= content_tag :h1, @group.name,        class: "title is-1" %>
+              <%= content_tag :h6, @group.description, class: "subtitle is-6" %>
+              <%= content_tag :h6, @group.objective,   class: "is-marginless has-text-weight-light" %><br />
               <%= link_to members_group_path do %>
                 <%= content_tag :button,
                    "Members (#{@group.confirmed_members.count})", 

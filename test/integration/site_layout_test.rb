@@ -20,12 +20,9 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     sign_in @user
     get root_path
     assert_select 'a[href=?]',        friends_user_path(@user), text: "Friends"
-    assert_select 'a[href=?]',   received_friend_requests_path, text: "Friend Requests"
     assert_select 'a[href=?]',         albums_user_path(@user), text: "Albums"
-    assert_select 'a[href=?]', followed_pages_user_path(@user), text: "My Pages"
-    assert_select 'a[href=?]',                      pages_path, text: "All Pages"
-    assert_select 'a[href=?]',  joined_groups_user_path(@user), text: "My Groups"
-    assert_select 'a[href=?]',                     groups_path, text: "All Groups"
+    assert_select 'a[href=?]', followed_pages_user_path(@user), text: "Pages"
+    assert_select 'a[href=?]',  joined_groups_user_path(@user), text: "Groups"
     assert_select 'a[href=?]',            direct_messages_path, text: "Direct Messages"
   end
   

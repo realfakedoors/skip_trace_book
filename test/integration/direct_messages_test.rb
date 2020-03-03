@@ -43,7 +43,7 @@ class DirectMessagesTest < ActionDispatch::IntegrationTest
     # Then visit that DM.
     get direct_message_path(new_dm)
     assert_select "h1.title", text: @initiator.name
-    assert_select "h7",       text: @recipient.name
+    assert_select "h4",       text: @recipient.name
     assert_select "h6",       text: "whassup"
   end
 end

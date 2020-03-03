@@ -20,7 +20,7 @@ class InteractingWithGroupsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h1",       text: @group.name
     assert_select "h6",       text: @group.description
-    assert_select "h6",       text: "Objective: #{@group.objective}"
+    assert_select "h6",       text: @group.objective
     assert_select "button",   text: "Members (#{@group.confirmed_members.count})"
     assert_select "h3.title", text: "Discussions"
     assert_select "a",        text: @discussion.title

@@ -1,37 +1,35 @@
 <div class="box">
   <article class="media">
-    <%= link_to post do %>
-      <div class="media-left">
-        <figure class="image is-64x64">
-          <% author = post.postable %>
-          <% if    author.class == User && author.profile_picture? %>
-            <%= image_tag  author.profile_picture.url, size: "64x64" %>
-          <% elsif author.class == Page && author.avatar? %>
-            <%= image_tag  author.avatar.url,          size: "64x64" %>
-          <% else %>
-            <%= image_tag 'blank_profile_picture',     size: "64x64" %>
-          <% end  %>
-        </figure>
-      </div>
-      <div class="media-content">
-        <div class="content">
-          <p>
-            <strong><%= author.name %></strong>
-            <% if author.class == "User" %>
-              <small><%=  author.email %></small><br />
-            <% elsif author.class == "Page" %>
-              <small><%=  author.description %></small><br />
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <% author = post.postable %>
+        <% if    author.class == User && author.profile_picture? %>
+          <%= image_tag  author.profile_picture.url, size: "64x64" %>
+        <% elsif author.class == Page && author.avatar? %>
+          <%= image_tag  author.avatar.url,          size: "64x64" %>
+        <% else %>
+          <%= image_tag 'blank_profile_picture',     size: "64x64" %>
+        <% end  %>
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong><%= author.name %></strong>
+          <% if author.class == "User" %>
+            <small><%=  author.email %></small><br />
+          <% elsif author.class == "Page" %>
+            <small><%=  author.description %></small><br />
+          <% end %>
+          <small><%=  time_ago_in_words(post.created_at) %> ago</small><br />
+          <div class="post-content">
+            <%= post.content %><br />
+            <% if post.photo %>
+              <%= image_tag post.photo.photo_data.url %>
             <% end %>
-            <small><%=  time_ago_in_words(post.created_at) %> ago</small><br />
-            <div class="post-content">
-              <%= post.content %><br />
-              <% if post.photo %>
-                <%= image_tag post.photo.photo_data.url %>
-              <% end %>
-            </div>
-          </p>
-        </div>
-      <% end %>
+          </div>
+        </p>
+      </div>
       <%= render 'shared/content_footer', creator: post.postable, content: post %>
     </div>
   </article>

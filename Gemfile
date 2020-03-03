@@ -16,6 +16,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster.
 gem 'turbolinks', '~> 5'
+# Nokogiri (鋸) is an HTML, XML, SAX, and Reader parser.
+gem 'nokogiri', '>= 1.10.8'
 # Build JSON APIs with ease.
 gem 'jbuilder', '~> 2.5'
 # Automate jQuery with Rails.

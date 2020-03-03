@@ -1,8 +1,8 @@
 <div class="tile is-ancestor">
-  <div class="tile is-parent">
+  <div class="tile is-parent is-3">
     <% photos.each do |photo| %>
       <% if photo.photo_data? %>
-        <div class="tile is-child is-4">
+        <div class="tile is-child">
           <div class="image is-96x96">
             <%= link_to photo do %>
               <% if photo.photo_data? %>

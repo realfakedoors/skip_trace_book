@@ -19,11 +19,11 @@
             <%= render 'messages/message_profile_picture', message: message %>
           </div>
           <div class="media-content has-text-left">
-            <%= render 'messages/message_content',         message: message %>
+            <%= render 'messages/message_content', message: message %>
           </div>
           <div class="media-content">
             <% if message.photo %>
-              <%= render 'messages/message_photo',           photo: message.photo %>
+              <%= render 'messages/message_photo', photo: message.photo %>
             <% end %>
           </div>
         </article>

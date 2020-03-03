@@ -13,14 +13,15 @@
       <div id="navbarTop" class="navbar-menu">
         <div class="navbar-start">
           <% if user_signed_in? %>
-            <%= link_to "Friends",         friends_user_path(current_user), class: "navbar-item" %>
-            <%= link_to "Friend Requests",   received_friend_requests_path, class: "navbar-item" %>
-            <%= link_to "Albums",           albums_user_path(current_user), class: "navbar-item" %>
-            <%= link_to "My Pages", followed_pages_user_path(current_user), class: "navbar-item" %>
-            <%= link_to "All Pages",                            pages_path, class: "navbar-item" %>
-            <%= link_to "My Groups", joined_groups_user_path(current_user), class: "navbar-item" %>
-            <%= link_to "All Groups",                          groups_path, class: "navbar-item" %>
-            <%= link_to "Direct Messages",            direct_messages_path, class: "navbar-item" %>
+            <%= link_to "Friends",      friends_user_path(current_user), class: "navbar-item" %>
+            <%= link_to "Albums",        albums_user_path(current_user), class: "navbar-item" %>
+            <%= link_to "Pages", followed_pages_user_path(current_user), class: "navbar-item" %>
+            <%= link_to "Groups", joined_groups_user_path(current_user), class: "navbar-item" %>
+            <%= link_to "Direct Messages",         direct_messages_path, class: "navbar-item" %>
+          <% else %>
+            <%= link_to "Help",          help_path, class: "navbar-item" %>
+            <%= link_to "About Us",     about_path, class: "navbar-item" %>
+            <%= link_to "Contact",    contact_path, class: "navbar-item" %>
           <% end %>
         </div>
 
@@ -29,12 +30,14 @@
             <div class="buttons">
               <% if user_signed_in? %>
                 <%= link_to "Edit Profile", edit_user_registration_path, 
-                                                                   class: "button is-primary" %>
+                    class: "button is-primary" %>
                 <%= link_to "Log out", destroy_user_session_path, method: :delete, 
-                                                                   class: "button is-light" %> 
+                    class: "button is-light" %> 
               <% else %>
-                <%= link_to "Sign up", new_user_registration_path, class: "button is-primary" %>
-                <%= link_to "Log in",  new_user_session_path,      class: "button is-light" %>
+                <%= link_to "Sign up", new_user_registration_path, 
+                    class: "button is-primary" %>
+                <%= link_to "Log in", new_user_session_path,
+                    class: "button is-light" %>
               <% end %>
             </div>
           </div>

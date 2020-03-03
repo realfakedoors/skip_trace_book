@@ -6,6 +6,8 @@
 
 <%= link_to 'New Group', new_group_path, class: "button is-primary" %>
 
+<%= link_to "All Groups",   groups_path, class: "button is-primary" %>
+
 <%= content_tag :hr, "", class: "hr" %>
 
 <%= render 'shared/tiled_entities', entities: @groups, title: title %>
