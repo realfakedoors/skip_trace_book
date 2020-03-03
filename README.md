@@ -1,6 +1,6 @@
 The final project for The Odin Project's Ruby on Rails unit: a clone of Facebook!  
 
-LIVE on Heroku: https://young-sierra-50793.herokuapp.com/  
+LIVE on Heroku: https://skiptracebook.herokuapp.com/  
 
 https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project  
 
