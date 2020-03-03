@@ -73,7 +73,7 @@ Rails.application.configure do
   # Send emails through SMTP and sendgrid.
   config.action_mailer.delivery_method = :smtp
   # Define a default url for the mailer.
-  host = 'young-sierra-50793.herokuapp.com'
+  host = 'skiptracebook.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
